@@ -1,0 +1,105 @@
+{% extends "profile/layout_profile.html" %}
+{% block title %}EDITAR INVESTIGACIÓN{% endblock %}
+{% block content %}
+<div class="box-ver">
+  <div class="grid-int">
+    <div class="box-update m-1 p-1">
+      <h2 style="font-size: 25px;"> {{ publication.title }} </h2>
+      <p class="article-content" style="margin-bottom: 2px;"> Fecha de Publication: {{ publication.pub_date }} </p>
+      <p class="article-content" style="margin-bottom: 2px;"> DOI: {{ publication.link }} </p>
+      <p class="article-content" style="margin-bottom: 2px;"> Descripción: {{ publication.description }} </p>
+    </div>
+    <div class="edit-form justify-content-center mb-3">
+      <a class="btn btn-primary" href="#form_upublication" data-bs-toggle="modal" data-bs-target=".bd-upub-modal-lg">UPDATE</a>
+    </div>
+    <div class="delete-form justify-content-center mb-3">
+      <form action="{{ url_for('delete_publication', publication_id=publication.id) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+        <input class="btn btn-danger" type="submit" value="DELETE">
+      </form>
+    </div>
+  </div>  
+</div>
+<!-- MODAL EDIT -->
+<div class="modal fade bd-upub-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><b>EDITAR COLABORACIÓN CIENTÍFICA: </b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" id="">
+          <div class="">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+              <div class="label-form">
+                  {{ form.title.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                  {% if form.title.errors %}
+                      {{ form.title(class="message-error") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.title.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.title(class="input") }}
+                  {% endif %}
+              </div>
+              <div class="label-form">
+                  {{ form.pub_date.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                  {% if form.pub_date.errors %}
+                      {{ form.pub_date(class="message-error") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.pub_date.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.pub_date(class="datepicker input") }}
+                  {% endif %}
+              </div>
+              <div class="label-form">
+                  {{ form.link.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                  {% if form.link.errors %}
+                      {{ form.link(class="message-error") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.link.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.link(class="input") }}
+                  {% endif %}
+              </div>
+              <div class="label-form">
+                  {{ form.description.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                  {% if form.description.errors %}
+                      {{ form.description(class="message-error") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.description.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.description(class="input-d") }}
+                  {% endif %}
+              </div>
+              <div class="submit-form">
+                  {{ form.submit(class="submit") }}
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!----------------------->
+{% endblock %}

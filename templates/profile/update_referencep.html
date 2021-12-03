@@ -1,0 +1,121 @@
+{% extends "profile/layout_profile.html" %}
+{% block title %}EDITAR REFERENCIA PERSONAL{% endblock %}
+{% block content %}
+<div class="box-ver">
+  <div class="grid-int">
+    <div class="box-update m-1 p-1">
+      <h2 style="font-size: 25px;"> {{ referencep.name_rp }} </h2>
+      <p class="article-content" style="margin-bottom: 2px;">{{ referencep.profession_rp }} </p>
+      <p class="article-content" style="margin-bottom: 2px;">{{ referencep.relation_rp }} </p>
+      <p class="article-content" style="margin-bottom: 2px;">Teléfono: {{ referencep.number_rp }} </p>
+      <p class="article-content" style="margin-bottom: 2px;">Correo: {{ referencep.mail_rp }} </p>
+    </div>
+    <div class="edit-form justify-content-center mb-3">
+      <a class="btn btn-primary" href="#form_ureferencep" data-bs-toggle="modal" data-bs-target=".bd-urefp-modal-lg">UPDATE</a>
+    </div>
+    <div class="delete-form justify-content-center mb-3">
+      <form action="{{ url_for('delete_referencep', referencep_id=referencep.id) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+        <input class="btn btn-danger" type="submit" value="DELETE">
+      </form>
+    </div>
+  </div>  
+</div>
+<!-- MODAL EDIT -->
+<div class="modal fade bd-urefp-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><b>EDITAR REFERECNIA PERSONAL: </b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" id="">
+          <div class="">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+              <div class="label-form">
+                {{ form.name_rp.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if form.name_rp.errors %}
+                {{ form.name_rp(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in form.name_rp.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name_rp(class="input") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ form.profession_rp.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if form.profession_rp.errors %}
+                {{ form.profession_rp(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in form.profession_rp.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.profession_rp(class="input") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ form.relation_rp.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if form.relation_rp.errors %}
+                {{ form.relation_rp(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in form.relation_rp.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.relation_rp(class="input") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ form.number_rp.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if form.number_rp.errors %}
+                {{ form.number_rp(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in form.number_rp.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.number_rp(class="input") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ form.mail_rp.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if form.mail_rp.errors %}
+                {{ form.mail_rp(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in form.mail_rp.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.mail_rp(class="input") }}
+                {% endif %}
+              </div>
+              <div class="submit-form">
+                {{ form.submit(class="submit") }}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!---------------->
+{% endblock %}

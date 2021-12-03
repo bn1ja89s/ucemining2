@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{user.firstname}} {{user.lastname}}</title>
+  <link rel="shortcut icon" href="{{ url_for('static',filename='img/web/logo.png')}}">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/fontawesome/all.min.css')}}">
+  <script src="html2pdf.bundle.min.js"></script>
+  <!--Nuestro script, que se encarga de crear el PDF usando la librería-->
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='dist/css/adminlte.min.css')}}">
+
+  <script src="https://kit.fontawesome.com/83abc70219.js" crossorigin="anonymous" media="print"></script>
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+  <div class="wrapper">
+    <!-- Navbar -->
+
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12" style="text-align: center;">
+              <h1>
+                <a href="javascript:window.print()">GUARDAR/ IMPRIMIR / HOJA DE VIDA</a>
+              </h1>
+            </div>
+
+          </div>
+        </div><!-- /.container-fluid -->
+
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                  <div class="text-center">
+                    <img class="profile-user-img img-fluid img-circle"
+                      src="{{url_for('static', filename='img/profile/' + user.photo +'.jpg')}}"
+                      alt="User profile picture">
+                  </div>
+
+                  <h3 class="profile-username text-center">{{user.firstname}} {{user.lastname}}</h3>
+
+                  <p class="text-muted text-center">{{user.career}}</p>
+
+                  <div class="container-fluid" style="
+                  margin-bottom: 50px;">
+                    <div class="row">
+                      <div class="col-3">
+                        <a href="{{ user.facebook }}"><i class="fab fa-facebook-f bg-primary" style=" border-radius: 50%;
+                          font-size: 16px;
+                          height: 30px;
+                          left: 18px;
+                          line-height: 30px;
+                          position: absolute;
+                          text-align: center;
+                          top: 0;
+                          width: 30px;"></i></a>
+                      </div>
+                      <div class="col-3">
+                        <a href="{{ user.instagram }}"><i class="fab fa-instagram bg-primary" style=" border-radius: 50%;
+                        font-size: 16px;
+                        height: 30px;
+                        left: 18px;
+                        line-height: 30px;
+                        position: absolute;
+                        text-align: center;
+                        top: 0;
+                        width: 30px;"></i></a>
+                      </div>
+                      <div class="col-3">
+                        <a href="{{ user.twitter }}"><i class="fab fa-twitter bg-primary" style=" border-radius: 50%;
+                        font-size: 16px;
+                        height: 30px;
+                        left: 18px;
+                        line-height: 30px;
+                        position: absolute;
+                        text-align: center;
+                        top: 0;
+                        width: 30px;"></i></a>
+                      </div>
+                      <div class="col-3">
+                        <a href="{{ user.linkendin }}"><i class="fab fa-linkedin-in bg-primary" style=" border-radius: 50%;
+                        font-size: 16px;
+                        height: 30px;
+                        left: 18px;
+                        line-height: 30px;
+                        position: absolute;
+                        text-align: center;
+                        top: 0;
+                        width: 30px;"></i></a>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                      <b>Usuario:</b> <span class="float-right">{{user.user_type}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Edad:</b> <span class="float-right">{{user.age}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Correo Registro:</b> <span class="float-right">{{user.email}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Correo Alternativo:</b> <span class="float-right">{{user.mail_sec}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Teléfono:</b> <span class="float-right">{{user.contact}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+
+              <!-- About Me Box -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Sobre Mi</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <p class="text-muted">
+                    {{user.about_me}}
+                  </p>
+                  <hr>
+                  <strong>Mis habilidades:</strong>
+                  <p class="text-muted">{{user.habilitie}}</p>
+                  <hr>
+                  <strong>Mis Intereses:</strong>
+                  <p class="text-muted">{{user.interest}}</p>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+              <div class="card">
+                <div class="card-header p-2">
+                  <ul class="nav nav-pills">
+                    <h4 class="h4">Información</h4>
+                  </ul>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+                    <!-- /.tab-pane -->
+
+                    <!-- The timeline -->
+                    <div class="timeline timeline-inverse">
+                      <!-- timeline time label -->
+                      <div class="time-label">
+                        <span class="bg-primary">
+                          INSTRUCCIÓN ACADÉMICA
+                        </span>
+                      </div>
+                      <!-- /.timeline-label -->
+                      <!-- timeline item -->
+                      {% for education in educations %}
+                      <div>
+                        <i class="fas fa-graduation-cap bg-primary"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">
+                            <strong>{{ education.name_institution }}</strong>
+                          </h3>
+                          <div class="timeline-body">
+                            <h3>{{ education.degree }}</h3>
+                            <strong>Nivel de Instrucción:</strong> {{ education.level_education }}
+                            {% if (education.end_date == None or education.end_date == "") %}
+                            <h6>{{ education.start_date.strftime('%d/%m/%Y') }} - Sin Finalizar</h6>
+                            {% else %}
+                            <h6>{{ education.start_date.strftime('%d/%m/%Y') }} - {{
+                              education.end_date.strftime('%d/%m/%Y')
+                              }}</h6>
+                          </div>
+                          {% endif %}
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                      <div class="time-label-inverse">
+                        <span class="bg-success">
+                          CURSOS Y CAPACITACIONES
+                        </span>
+                      </div>
+                      {% for course in courses %}
+                      <div>
+                        <i class="fas fa-chalkboard-teacher bg-success"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">
+                            <strong>{{ course.description }}</strong>
+                          </h3>
+
+                          <div class="timeline-body">
+                            <strong>Área de Capacitación:</strong> {{ course.area }}
+
+                            <h6>
+                              Horas de Capacitación: {{ course.time }}
+                              {{ course.start_date.strftime('%d/%m/%Y') }} - {{
+                              course.end_date.strftime('%d/%m/%Y')
+                              }}
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                      <div class="time-label">
+                        <span class="bg-info">
+                          INVESTIGACIONES Y PUBLICACIONES
+                        </span>
+                      </div>
+                      {% for publication in publications %}
+                      <div>
+                        <i class="fas fa-book bg-info"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">
+                            <strong>{{ publication.title }}</strong>
+                          </h3>
+                          <div class="timeline-body">
+                             
+                            
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                      <div class="time-label">
+                        <span class="bg-gray">
+                          EXPERIENCIAS DE VOLUNTARIADO Y LIDERAZGO
+                        </span>
+                      </div>
+                      {% for volunteering in volunteerings %}
+                      <div>
+                        <i class="fas fa-hands-helping bg-gray"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">
+                            
+                          </h3>
+                          <div class="timeline-body">
+                            
+                            <h6>
+                              <strong>Actividades Desempeñadas:</strong> {{ volunteering.activities }}
+                            </h6>
+                            <h6>
+                              {{ volunteering.start_date.strftime('%d/%m/%Y') }} - {{
+                              volunteering.end_date.strftime('%d/%m/%Y') }}
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                      <div class="time-label">
+                        <span class="bg-dark">
+                          EXPERIENCIAS LABORALES
+                        </span>
+                      </div>
+                      {% for experience in experiences %}
+                      <div>
+                        <i class="fas fa-industry bg-dark"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">{{ experience.company }}</h3>
+                          <div class="timeline-body">
+                            {{ experience.possition }}
+                          </div>
+                          <div class="timeline-body">
+                            {{ experience.area_e }}
+                          </div>
+                          <div class="timeline-body">
+                            {{ experience.start_date_e.strftime('%d/%m/%Y') }} - {{
+                            experience.end_date_e.strftime('%d/%m/%Y') }} <br>
+                            <strong>Tiempo de Servicio:</strong>{{ experience.time_e }} años
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                      <div class="time-label">
+                        <span class="bg-purple">
+                          DESTREZA EN IDIOMAS
+                        </span>
+                      </div>
+                      {% for language in languages %}
+                      <div>
+                        <i class="fas fa-language bg-purple"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">
+                            <strong>{{ language.language }}</strong>
+                          </h3>
+                          <div class="timeline-body">
+                            {{ language.level }}
+                            <h6>
+                              <strong>Institución de Instrucción:</strong> {{ language.study_center }}
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                      <div class="time-label">
+                        <span class="bg-red">
+                          REFERENCIAS LABORALES
+                        </span>
+                      </div>
+                      {% for referencew in referencesw %}
+                      <div>
+                        <i class="fas fa-handshake bg-red"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">
+                            <strong>{{ referencew.name_rw }}</strong>
+                          </h3>
+                          <div class="timeline-body">
+                            <h6>{{ referencew.profession_rw }}</h6>
+                            <h6>{{ referencew.company_rw }}</h6>
+                            <h6>{{ referencew.position_rw }}</h6>
+                            <h6>{{ referencew.number_rw }}</h6>
+                            <h6>{{ referencew.mail_rw }}</h6>
+                          </div>
+
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                      <div class="time-label">
+                        <span style="background-color: rgb(243, 168, 30);">
+                          REFERENCIAS PERSONALES
+                        </span>
+                      </div>
+                      {% for referencep in referencesp %}
+                      <div>
+                        <i class="fas fa-handshake" style="background-color: rgb(243, 168, 30);"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">
+                            <strong>{{ referencep.name_rp }}</strong>
+                          </h3>
+                          <div class="timeline-body">
+                            <h6>{{ referencep.profession_rp }}</h6>
+                            <h6>{{ referencep.relation_rp }}</h6>
+                            <h6>{{ referencep.number_rp }}</h6>
+                            <h6>{{ referencep.mail_rp }}</h6>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+
+                  </div>
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="float-right d-none d-block">
+      <b>Version</b> 1.0.0
+    </div>
+    <strong>Enginer 2021.</strong><span></span>Generado en <strong>Ucemining.</strong>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+
+</body>
+
+
+</html>

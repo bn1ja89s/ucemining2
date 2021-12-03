@@ -1,0 +1,73 @@
+{% extends "registro/auth-layout.html" %} {% block content %}
+
+{% from "macro.html" import render_field %}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Authentication card start -->
+            <div class="login-card card-block auth-body me-auto ms-auto">
+                <form class="md-float-material" action="{{ url_for('login') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                    <div class="auth-box">
+                        <div class="row m-b-20">
+                            <div class="col-md-12">
+                                <h3 class="text-left txt-primary">Sign In</h3>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="input-group">
+                            {{ form.username(class="form-control", maxlength=10, placeholder="Ingrese su número de cédula", style="height:
+                            45px;") }}
+                            <span class="md-line"></span>
+                        </div>
+                        <div class="input-group">
+                            {{ form.password(class="form-control", placeholder="Ingrese la contraseña", style="height:
+                            45px;") }}
+                            <span class="md-line"></span>
+                        </div>
+                        <div class="row m-t-25 text-left">
+                            <div class="col-sm-7 col-xs-12">
+                                <div class="checkbox-fade fade-in-primary">
+                                </div>
+                            </div>
+                            <div class="col-sm-8 col-xs-12 forgot-phone text-left">
+                                <a href="{{ url_for('forgotpass') }}" class="text-left f-w-600 text-inverse"> <p>¿Olvidaste
+                                    tu contraseña?</p>  </a>
+                            </div>
+                        </div>
+                        <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <input type="submit" name="signup_submit"
+                                    class='btn btn-primary btn-md btn-block waves-effect text-center m-b-20'
+                                    value="Iniciar Sesion" />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p class="text-inverse text-left m-b-0">¿Aún no tienes cuenta? <a
+                                        href="{{ url_for('register') }}"><strong>Regístrate</strong></a></p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class=" row">
+                            <div class="col-md-10">
+                                <p class="text-inverse text-left m-b-0">Gracias por visitar nuestra
+                                    Página Web</p>
+                                <p class="text-inverse text-left"><b>Enginer Group</b></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

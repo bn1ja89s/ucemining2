@@ -1,0 +1,102 @@
+{% extends 'profile/layout_profile.html' %}
+{% block head %}
+    {% block title %}UCE MINING{% endblock %}
+{% endblock %}
+{% block content %}
+<section class="img-portada">
+    <div class="grid">
+        <div class="text-portada">
+            <h1 class="title-portada">ENGINER</h1>
+            <P class="banner__subtitle">"La mejor forma de predecir el futuro es crearlo"</P>
+            <h4 class="extra-portada">Peter Drucker</h4>
+            <a href="{{url_for('register')}}" class="act">EMPIEZA AHORA</a>
+        </div>
+    </div>
+</section>
+<section class="about-us">
+    <div class="grid">
+        <div class="text-about-us">
+            <h1 class="title-about-us"><strong>NOSOTROS</strong></h1>
+            <h5 class="subtitle-about-us">ENGINER GRUOP</h5>
+            <p class="parrafo-about-us">La inserción de los profesionales y estudiantes en el campo laboral es una necesidad imperante que ha llevado a nuestro grupo de desarrollo la tarea de crear una plataforma que brinda el servicio de ser parte de una base de datos dinámica, dónde puedas incluir la experiencia recogida en años de estudio y a su vez, ser tomado en cuenta por empresas que a través de tu perfil podrán conocerte y tener tus contactos y primeros acercamientos.</p> <br>
+            <a href="{{url_for('about')}}" class="act">MÁS INFORMACIÓN</a>
+        </div>
+    </div>
+</section>
+<section class="services" id="services">
+    <div class="grid">
+        <div class="text-services">
+            <h1 class="title-services">NUESTROS SERVICIOS</h1>
+            <p class="parrafo-services">...</p> <br>
+        </div>
+        <div class="items">
+            <div class="item">
+                <i class="fas fa-users"></i>
+                <h3 class="title-services">Pasantías</h3>
+                <p class="description-services">La oportunidad de ser pasante a partir del sexto nivel de estudios.</p>
+            </div>
+            <div class="item">
+                <i class="fas fa-industry"></i>
+                <h3 class="title-services">Empresas Mineras</h3>
+                <p class="description-services">Encuentra el perfil del profesional que necesitas, con el acceso a la base de datos dinámica que posee ENGINER.</p>
+            </div>
+            <div class="item">
+                <i class="fas fa-user-tie"></i>
+                <h3 class="title-services">Profesionales</h3>
+                <p class="description-services">Registra tu perfil y actualiza constantemente para recibir ofertas laborales.</p>
+            </div>
+            <div class="footer-section">
+                <p class="description-footer">Regístrate para recibir alertas y solicitar ofertas</p> 
+                <a href="{{url_for('register')}}" class="act">REGISTRARSE</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ubication">
+    <div class="grid">
+        <div class="text-ubication">
+            <h1 class="title-ubication-p">CONTÁCTANOS</h1>
+        </div>
+        <div class="map-ubication">
+            <iframe class="map-ubication" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7943823393352!2d-78.50772952726133!3d-0.19847474526063616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a46f3b18169%3A0x941d2aa7a06e5c1f!2sFIGEMPA!5e0!3m2!1ses!2sec!4v1605495311574!5m2!1ses!2sec" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+        <div class="items-ubication">
+            <div class="item-ubication">
+                <h3 class="title-ubication">DIRECCIÓN</h3>
+                <span class="extras">Ciudadela Universitaria, calle Jerónimo Leyton y Av. La Gasca (Quito, Ecuador)</span>
+            </div>
+            <div class="item-ubication">
+                <h3 class="title-ubication">HORARIOS DE ATENCIÓN</h3>
+                <span class="extras">Lunes a Viernes: 08-00 - 16:00</span>
+            </div>
+            <div class="item-ubication">
+                <h3 class="title-ubication">CONTACTOS</h3>
+                <span class="extras">Teléfono:</span> <br>
+                <span class="extras">(+593) (02) 2550-588</span> <br>
+                <span class="extras">(+593) (02) 2566-726</span> <br>
+                <span class="extras">Extensión: 113 - Dirección Minas</span> <br>
+                <span class="extras">Email: minasvin20@gmail.com</span>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer-p">
+    <div class="grid">
+        <div class="text-footer">
+            <h2 class="title-footer">FOLLOW US</h2>
+        </div>
+        <div class="icon1">
+            <a href=""><i class="fab fa-facebook-square"></i></a>
+        </div>
+        <div class="icon2">
+            <a href=""><i class="fab fa-twitter-square"></i></a>
+        </div>
+        <div class="icon3">
+            <a href="https://www.instagram.com/ucemining/"><i class="fab fa-instagram-square"></i></a>
+        </div>
+        <div class="icon4">
+            <a href=""><i class="fab fa-youtube-square"></i></a>
+        </div>
+    </div>
+</footer>
+{% endblock %}

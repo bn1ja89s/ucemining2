@@ -1,0 +1,92 @@
+{% extends "profile/layout_profile.html" %}
+{% block title %}EDITAR DESTREZA DE IDIOMAS{% endblock %}
+{% block content %}
+<div class="box-ver">
+  <div class="grid-int">
+    <div class="box-update m-1 p-1">
+      <h2 style="font-size: 25px;"> {{ language.language }} </h2>
+      <p class="article-content" style="margin-bottom: 2px;">{{ language.level }} </p>
+      <p class="article-content" style="margin-bottom: 2px;"> Institución de Instrucción: {{ language.study_center }} </p>
+    </div>
+    <div class="edit-form justify-content-center mb-3">
+      <a class="btn btn-primary" href="#form_ulanguage" data-bs-toggle="modal" data-bs-target=".bd-ulan-modal-lg">UPDATE</a>
+    </div>
+    <div class="delete-form justify-content-center mb-3">
+      <form action="{{ url_for('delete_language', language_id=language.id) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+        <input class="btn btn-danger" type="submit" value="DELETE">
+      </form>
+    </div>
+  </div>  
+</div>
+<!-- MODAL EDIT -->
+<div class="modal fade bd-ulan-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><b>EDITAR EXPERIENCIA EN IDIOMAS: </b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" id="">
+          <div class="">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+              <div class="title-form">
+                  <h1>NUEVA/EDITAR DESTREZA DE IDIOMAS</h1>
+              </div>
+              <div class="label-form">
+                  {{ form.language.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                  {% if form.language.errors %}
+                      {{ form.language(class="message-error") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.language.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.language(class="input") }}
+                  {% endif %}
+              </div>
+              <div class="label-form">
+                  {{ form.level.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                  {% if form.level.errors %}
+                      {{ form.level(class="message-error") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.level.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.level(class="input") }}
+                  {% endif %}
+              </div>
+              <div class="label-form">
+                  {{ form.study_center.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                  {% if form.study_center.errors %}
+                      {{ form.study_center(class="message-error") }}
+                      <div class="invalid-feedback">
+                          {% for error in form.study_center.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                      {{ form.study_center(class="input") }}
+                  {% endif %}
+              </div>
+              <div class="submit-form">
+                  {{ form.submit(class="submit") }}
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!---------------->
+{% endblock %}

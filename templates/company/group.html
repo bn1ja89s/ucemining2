@@ -1,0 +1,58 @@
+{% extends "company/proyecto_layout.html" %}
+{% block content %}
+
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="ti-ruler-pencil bg-c-blue"></i>
+                <div class="d-inline">
+                    <h4>Proyectos</h4>
+                    <span>
+                        Grupo de proyectos</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="{{url_for('home')}}">
+                            <i class="icofont icofont-home"></i>
+                        </a>
+                    <li class="breadcrumb-item"><a href=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- falata conexiones -->
+<div class="card">
+    <div class="card-header">
+        <h5>TABLA</h5>
+        <span>Proyectos</span>
+        <div class="card-header-right">    <ul class="list-unstyled card-option">        <li><i class="icofont icofont-simple-left "></i></li>        <li><i class="icofont icofont-maximize full-card"></i></li>        <li><i class="icofont icofont-minus minimize-card"></i></li>        <li><i class="icofont icofont-refresh reload-card"></i></li>        <li><i class="icofont icofont-error close-card"></i></li>    </ul></div>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Proyecto</th>
+                        <th>Estudiantes</th>
+                        <th>Egresados</th>
+                        <th>Profesionales</th>
+                        
+                    </tr>
+                </thead>
+
+                
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

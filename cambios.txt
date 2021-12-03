@@ -1,0 +1,10 @@
+font-size: 14px;
+style="font-size: 14px;"
+
+
+Esta pregunta se hizo para Bootstrap 5 alpha y, por ml-autolo tanto , aún debería funcionar.
+
+A partir de Bootstrap 5 beta (diciembre de 2020), la izquierda y la derecha han sido reemplazadas por inicio y final para soporte RTL . Por lo tanto, las utilidades de margen cambiaron para Bootstrap 5 beta:
+
+ml-auto => ms-auto
+mr-auto => me-auto

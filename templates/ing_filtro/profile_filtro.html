@@ -1,0 +1,415 @@
+{% extends "company/layout.html" %}
+{% block content %}
+
+<!-- Page-header start -->
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="ti-ruler-pencil bg-c-blue"></i>
+                <div class="d-inline">
+                    <h4></h4>
+                    <span>
+                        Universidad Central del Ecuador</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+                <div class="breadcrumb-title">
+                    <span class="f-left m-t-10 text-muted">
+                        <a href="{{url_for('home')}}"><i class="f-16 icofont icofont-home m-r-10"></i></a>
+                        <i class="breadcrumb-item f-16 m-r-10">/</i><a href="{{url_for(car)}}">{{car}}</a>
+                        <i class="breadcrumb-item f-16 m-r-10">/</i><a class="text-capitalize"
+                            href="">{{user.firstname}} {{user.lastname}}</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Card Perfil -->
+
+<div class="col-md-12">
+
+    <div class="card project-task">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header card">
+                    <div class="row align-items-end">
+                        <div class="col-lg-12">
+                            <div class="page-header-title">
+
+                                <a>
+                                    <img src="{{url_for('static', filename='img/profile/' + user.photo +'.jpg')}}"
+                                        title="{{user.username}}" class="rounded-circle"
+                                        style="width: 150px; height: 150px; background-repeat: no-repeat; background-position: 50%; background-size: 100% auto;">
+                                </a>
+                                <div class="card-block p-b-10">
+                                    <h5><strong>{{user.firstname}} {{user.lastname}}</strong></h5>
+                                    <h5><strong>Carrera:</strong> {{user.career}}</h5>
+                                    <h5><strong>Usuario:</strong> {{user.user_type}}</h5>
+                                    <hr>
+                                    <h5><strong>Edad:</strong> {{user.age}}</h5>
+                                    <h5><strong>Correo Registro:</strong> {{user.email}}</h5>
+                                    <h5><strong>Correo Alternativo:</strong> {{user.mail_sec}}</h5>
+                                    <h5><strong>Contacto: </strong> {{user.contact}}</h5>
+                                    <h5><strong>Sobre mi:</strong> {{user.about_me}}</h5>
+                                    <h5><strong>Mis habilidades:</strong> {{user.habilitie}}</h5>
+                                    <h5><strong>Mis Intereses:</strong> {{user.interest}}</h5>
+                                    <a class="col" href="{{ user.facebook }}"><i class="fab fa-facebook-f"
+                                            style="color: #0072ff;"></i></a>
+                                    <a class="col" href="{{ user.instagram }}"><i class="fab fa-instagram"
+                                            style="color: #0072ff;"></i></a>
+                                    <a class="col" href="{{ user.twitter }}"><i class="fab fa-twitter"
+                                            style="color: #0072ff;"></i></a>
+                                    <a class="col" href="{{ user.linkendin }}"><i class="fab fa-linkedin-in"
+                                            style="color: #0072ff;"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-0">
+                    <div class="col-12 align-items-center p-0">
+                        <div class="bg-light">
+                            <a>
+                                <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start"
+                                    style="background: #6c757d;font-size: 22px; width: 100%; border-radius:0%">
+                                    <h5><strong>INSTRUCCIÓN ACADÉMICA</strong></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                    <div class="card-body bg-light pt-3 pb-0">
+                        {% for education in educations %}
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                <div class="icon-box">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="box-element">
+                                    <a class="">
+                                        <h4 class="text-uppercase text-dark">{{ education.name_institution }}</h4>
+                                    </a>
+                                    <h4>{{ education.degree }}</h4>
+                                    Nivel de Instrucción: {{ education.level_education }} <br>
+                                    {% if (education.end_date == None or education.end_date == "") %}
+                                    {{ education.start_date.strftime('%d/%m/%Y') }} - Sin Finalizar <br>
+                                    {% else %}
+                                    {{ education.start_date.strftime('%d/%m/%Y') }} - {{
+                                    education.end_date.strftime('%d/%m/%Y')
+                                    }} <br>
+                                    {% endif %}
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-0">
+                    <div class="col-12 align-items-center p-0">
+                        <div class="bg-light">
+                            <a class="card-link">
+                                <div class="navbar-brand p-2 m-0 text-dark d-flex justify-content-start"
+                                    style="background: #6c757d;font-size: 22px; width: 100%; border-radius:0%">
+                                    <h5><strong>CURSOS Y CAPACITACIONES</strong></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card-body bg-light pt-3 pb-0">
+                        {% for course in courses %}
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                <div class="icon-box">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="box-element">
+                                    <a class="">
+                                        <h4 class="text-uppercase text-dark">{{ course.description }}</h4>
+                                    </a>
+                                    <h4>Área de Capacitación: {{ course.area }}</h4>
+                                    Horas de Capacitación: {{ course.time }} <br>
+                                    {{ course.start_date.strftime('%d/%m/%Y') }} - {{
+                                    course.end_date.strftime('%d/%m/%Y')
+                                    }}
+                                    <br>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-0">
+                    <div class="col-12 align-items-center p-0">
+                        <div class="bg-light">
+                            <a class="card-link">
+                                <div class="navbar p-2 m-0 text-dark  d-flex justify-content-start"
+                                    style="background: #6c757d;font-size: 22px; width: 100%; border-radius:0%">
+                                    <h5><strong>INVESTIGACIONES Y PUBLICACIONES</strong></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseTree" class="collapse show" data-parent="#accordion">
+                    <div class="card-body bg-light pt-3 pb-0">
+                        {% for publication in publications %}
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                <div class="icon-box">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="box-element">
+                                    <a class="">
+                                        <h4 class="text-uppercase text-dark">{{ publication.title }}</h4>
+                                    </a>
+                                    Fecha de publicación: {{ publication.pub_date.strftime('%d/%m/%Y') }}<br>
+                                    DOI: <a class="DOI">{{ publication.link }}</a> <br>
+                                    <h4>Descipción: </h4>{{ publication.description }} <br>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-0">
+                    <div class="col-12 align-items-center p-0">
+                        <div class="bg-light">
+                            <a class="card-link">
+                                <div class="navbar p-2 m-0 text-dark  d-flex justify-content-start"
+                                    style="background: #6c757d;font-size: 22px; width: 100%; border-radius:0%">
+                                    <h5><strong>EXPERIENCIAS DE VOLUNTARIADO Y LIDERAZGO</strong></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseFour" class="collapse show" data-parent="#accordion">
+                    <div class="card-body bg-light pt-3 pb-0">
+                        {% for volunteering in volunteerings %}
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                <div class="icon-box">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="box-element">
+                                    <a class="">
+                                        <h4 class="text-uppercase text-dark">{{ volunteering.organization }}</h4>
+                                    </a>
+                                    <h4>{{ volunteering.possition }}</h4>
+                                    {{ volunteering.start_date.strftime('%d/%m/%Y') }} - {{
+                                    volunteering.end_date.strftime('%d/%m/%Y') }} <br>
+                                    <h4>Actividades Desempeñadas: </h4>{{ volunteering.activities }} <br>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-0">
+                    <div class="col-12 align-items-center p-0">
+                        <div class="bg-light">
+                            <a class="card-link">
+                                <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start"
+                                    style="background: #6c757d;font-size: 22px; width: 100%; border-radius:0%">
+                                    <h5><strong>EXPERIENCIAS LABORALES</strong></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseFive" class="collapse show" data-parent="#accordion">
+                    <div class="card-body bg-light pt-3 pb-0">
+                        {% for experience in experiences %}
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                <div class="icon-box">
+                                    <i class="fas fa-industry"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="box-element">
+                                    <a class="">
+                                        <h4 class="text-uppercase text-dark">{{ experience.company }}</h4>
+                                    </a>
+                                    <h4>{{ experience.possition }}</h4>
+                                    Área de servicio: {{ experience.area_e }} <br>
+                                    {{ experience.start_date_e.strftime('%d/%m/%Y') }} - {{
+                                    experience.end_date_e.strftime('%d/%m/%Y') }} <br>
+                                    Tiempo de Servicio: {{ experience.time_e }} años <br>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-0">
+                    <div class="col-12 align-items-center p-0">
+                        <div class="bg-light">
+                            <a class="card-link">
+                                <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start"
+                                    style="background: #6c757d;font-size: 22px; width: 100%; border-radius:0%">
+                                    <h5><strong>DESTREZA EN IDIOMAS</strong></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseSex" class="collapse show" data-parent="#accordion">
+                    <div class="card-body bg-light pt-3 pb-0">
+                        {% for language in languages %}
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                <div class="icon-box">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="box-element">
+                                    <a class="">
+                                        <h4 class="text-uppercase text-dark">{{ language.language }}</h4>
+                                    </a>
+                                    <h4>{{ language.level }}</h4>
+                                    Institución de Instrucción: {{ language.study_center }} <br>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-0">
+                    <div class="col-12 align-items-center p-0">
+                        <div class="bg-light">
+                            <a class="card-link">
+                                <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start"
+                                    style="background: #6c757d;font-size: 22px; width: 100%; border-radius:0%">
+                                    <h5><strong>REFERENCIAS LABORALES</strong></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseSex" class="collapse show" data-parent="#accordion">
+                    <div class="card-body bg-light pt-3 pb-0">
+                        {% for referencew in referencesw %}
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                <div class="icon-box">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="box-element">
+
+                                    <h4 class="text-uppercase text-dark">{{ referencew.name_rw }}</h4>
+
+                                    <h3>{{ referencew.profession_rw }}</h3>
+                                    {{ referencew.company_rw }} <br>
+                                    {{ referencew.position_rw }} <br>
+                                    {{ referencew.number_rw }} <br>
+                                    {{ referencew.mail_rw }} <br>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-0">
+                    <div class="col-12 align-items-center p-0">
+                        <div class="bg-light">
+                            <a class="card-link">
+                                <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start"
+                                    style="background: #6c757d;font-size: 22px; width: 100%; border-radius:0%">
+                                    <h5><strong>REFERENCIAS PERSONALES</strong></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseOct" class="collapse show" data-parent="#accordion">
+                    <div class="card-body bg-light pt-3 pb-0">
+                        {% for referencep in referencesp %}
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                <div class="icon-box">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="box-element">
+
+                                    <h4 class="text-uppercase text-dark">{{ referencep.name_rp }}</h4>
+
+                                    <h3>{{ referencep.profession_rp }}</h3>
+                                    {{ referencep.relation_rp }} <br>
+                                    {{ referencep.number_rp }} <br>
+                                    {{ referencep.mail_rp }} <br>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="div">
+        <a class="btn btn-primary" href="{{url_for('pdf', user_id = user.id)}}" target="_blank"><i class="ti-printer"></i>Imprimir</a>
+        {% if user.cv == None or user.cv == '' %}
+        <a class="btn btn-warning">No tiene CV</a>
+        {% else %}
+        <a class="btn btn-success" href="{{url_for('download', user_id = user.id)}}">{{user.cv}}.pdf</a>
+        {% endif %}
+
+        {% if marcador == 1 %}
+        <a class="btn btn-success" href="{{url_for('swe', user_id = user.id, company_id = company.id)}}"><i class="fas fa-check" style="font-size: 1em;"></i>Seleccionado</a>
+        {% else %}
+        <a class="btn btn-warning" href="{{url_for('sw', user_id = user.id, company_id = company.id)}}"><i class="fas fa-check" style="font-size: 1em;"></i>Seleccionar</a>
+        {% endif %}
+
+    </div>
+    <!-- End Card Perfil -->
+
+    {% endblock %}

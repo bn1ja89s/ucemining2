@@ -1,0 +1,31 @@
+flask flask_wtf pymysql flask_sqlalchemy email_validator flask-csrf mysql-connector-python werkzeug.utils flask_wtf
+jwt flask_login flask_mail flask_jwt_extended pymysql
+Flask_Datepicker pdfkit flask_jwt_extended wtforms werkzeug jwt datetime
+
+estapaginasolopuedeservistaporlasempresas
+6d81b1823d34e69143165ba999d33ba2e47a23210135ed27e4dc73f5bd655b4ed337c78ef9070f3d45209075fb6887c36edb99c90383a5b9a4777bc87ff8b143
+
+PODERES DE AUTORIDAD
+'home', 'login', 'register', 'registercompany', 'forgotpass', 'resetpass'
+
+#usuario
+
+'perfil', 'edit_education', 'edit_course', 'edit_publication', 'edit_volunteering', 'edit_experience', 'edit_language', 'delete_education', 'delete_course', 'delete_publication', 'delete_volunteering', 'delete_experience', 'delete_language'
+
+admin
+
+#empresa
+'inicio', 'perfil_fil', 'perfil_rec', 'Minas', 'Ambiental', 'Geologia', 'Petroleos', 'seleccion'
+
+Contraseña
+UC3F7G3MP4M1N4AS
+66e2bd2d++5aaca6343c1a8ecab+5b3+5eeebd1+
+Puerto
+3306
+End Point
+ucefigempa-1.camazvb05mbn.us-east-2.rds.amazonaws.com
+
+mysql+pymysql://UC3F7G3MP4M1N4AS:66e2bd2d++5aaca6343c1a8ecab+5b3+5eeebd1+@ucefigempa-1.camazvb05mbn.us-east-2.rds.amazonaws.com:3306/ucemining
+
+minasvin20@gmail.com
+minasuce

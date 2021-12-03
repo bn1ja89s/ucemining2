@@ -1,0 +1,141 @@
+{% extends "profile/layout_profile.html" %}
+{% block title %}EDITAR INSTRUCCIÓN{% endblock %}
+{% block content %}
+<script type="text/javascript">
+    function Deshabilitar(flexCheckChecked)
+    {
+      var input_date=document.getElementById("input_date");
+      input_date.disabled=flexCheckChecked.checked? true : false; 
+      if(!input_date.disabled)
+      {
+        input_date.focus()
+        function Delete()
+    {
+        document.getElementsById("input_date").delete();
+    }   
+      }
+    }   
+  </script>
+<div class="box-ver">
+  <div class="grid-int">
+    <div class="box-update m-1 p-1">
+      <h1 style="font-size: 35px;"><b>{{ education.name_institution }}</b></h1>
+      <h2 style="font-size: 25px;"> {{ education.level_education }} </h2>
+      <h3 style="font-size: 22px;">{{ education.degree }}</h3>
+      <p class="article-content" style="margin-bottom: 2px;"> Fecha de Inicio: {{ education.start_date }} </p>
+      {% if education.end_date == None or  education.end_date == "" %}
+      <p class="article-content" style="margin-bottom: 2px;"> Fecha de Culminación:  Sin Finalizar</p>
+      {% else %}
+      <p class="article-content" style="margin-bottom: 2px;"> Fecha de Culminación: {{ education.end_date }} </p>
+      {% endif %}
+    </div>
+    <div class="edit-form justify-content-center mb-3">
+        <a class="btn btn-primary" href="#form_ueducation" data-bs-toggle="modal" data-bs-target=".bd-uedu-modal-lg">UPDATE</a>
+    </div>
+    <div class="delete-form justify-content-center mb-3">
+      <form action="{{ url_for('delete_education', education_id=education.id) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+        <input class="btn btn-danger" type="submit" value="DELETE">
+      </form>
+    </div>
+  </div>  
+</div>
+<!-- MODAL EDIT -->
+<div class="modal fade bd-uedu-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><b>EDITAR INSTRUCCIÓN ACADÉMICA: </b></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST"  id="">
+            <div class="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                    {{ form.level_education.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                    {% if form.level_education.errors %}
+                        {{ form.level_education(class="message-error") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.level_education.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.level_education(class="input") }}
+                    {% endif %}
+                </div>
+                <div class="label-form">
+                    {{ form.name_institution.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                    {% if form.name_institution.errors %}
+                        {{ form.name_institution(class="message-error") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name_institution.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name_institution(class="input") }}
+                    {% endif %}
+                </div>
+                <div class="label-form">
+                    {{ form.degree.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                    {% if form.degree.errors %}
+                        {{ form.degree(class="message-error") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.degree.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.degree(class="input") }}
+                    {% endif %}
+                </div>
+                <div class="label-form">
+                    {{ form.start_date.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                    {% if form.start_date.errors %}
+                        {{ form.start_date(class="message-error") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.start_date.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.start_date(class="datepicker input") }}
+                    {% endif %}
+                </div>
+                <div class="label-form">
+                    {{ form.end_date.label(class="message-text") }}
+                    <input class="" type="checkbox" value="" id="flexCheckChecked"  onclick="Deshabilitar(this),Delete(this)"><label class="label-form" style="font-size: 15px;">En Proceso</label>
+                </div>
+                <div class="input-form">
+                    {% if form.end_date.errors %}
+                        {{ form.end_date(class="message-error") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.end_date.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.end_date(class="datepicker input",id='input_date',disable="disabled") }}
+                    {% endif %}
+                </div>
+                <div class="submit-form">
+                    {{ form.submit(class="submit") }}
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!---------------->
+{% endblock %}

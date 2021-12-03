@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{user.firstname}} {{user.lastname}}</title>
+    <link rel="shortcut icon" href="{{ url_for('static',filename='img/web/logo.png')}}">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/fontawesome/all.min.css')}}">
+    <script src="html2pdf.bundle.min.js"></script>
+    <!--Nuestro script, que se encarga de crear el PDF usando la librería-->
+
+    <!-- Theme style -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='dist/css/adminlte.min.css')}}">
+
+    <script src="https://kit.fontawesome.com/83abc70219.js" crossorigin="anonymous" media="print"></script>
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+    <div class="wrapper">
+        <!-- Navbar -->
+
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12" style="text-align: center;">
+                            <h1>
+                                <a href="javascript:window.print()">GUARDAR/ IMPRIMIR / HOJA DE VIDA</a>
+                            </h1>
+                        </div>
+
+                    </div>
+                </div><!-- /.container-fluid -->
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle"
+                                            src="{{url_for('static', filename='img/profile/' + user.photo +'.jpg')}}"
+                                            alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">{{user.firstname}} {{user.lastname}}</h3>
+
+                                    <p class="text-muted text-center">{{user.career}}</p>
+
+                                    <div class="container-fluid" style="
+                  margin-bottom: 50px;">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <a href="{{ user.facebook }}"><i class="fab fa-facebook-f bg-primary"
+                                                        style=" border-radius: 50%;
+                          font-size: 16px;
+                          height: 30px;
+                          left: 18px;
+                          line-height: 30px;
+                          position: absolute;
+                          text-align: center;
+                          top: 0;
+                          width: 30px;"></i></a>
+                                            </div>
+                                            <div class="col-3">
+                                                <a href="{{ user.instagram }}"><i class="fab fa-instagram bg-primary"
+                                                        style=" border-radius: 50%;
+                        font-size: 16px;
+                        height: 30px;
+                        left: 18px;
+                        line-height: 30px;
+                        position: absolute;
+                        text-align: center;
+                        top: 0;
+                        width: 30px;"></i></a>
+                                            </div>
+                                            <div class="col-3">
+                                                <a href="{{ user.twitter }}"><i class="fab fa-twitter bg-primary" style=" border-radius: 50%;
+                        font-size: 16px;
+                        height: 30px;
+                        left: 18px;
+                        line-height: 30px;
+                        position: absolute;
+                        text-align: center;
+                        top: 0;
+                        width: 30px;"></i></a>
+                                            </div>
+                                            <div class="col-3">
+                                                <a href="{{ user.linkendin }}"><i class="fab fa-linkedin-in bg-primary"
+                                                        style=" border-radius: 50%;
+                        font-size: 16px;
+                        height: 30px;
+                        left: 18px;
+                        line-height: 30px;
+                        position: absolute;
+                        text-align: center;
+                        top: 0;
+                        width: 30px;"></i></a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Usuario:</b> <span class="float-right">{{user.user_type}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Edad:</b> <span class="float-right">{{user.age}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Correo Registro:</b> <span class="float-right">{{user.email}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Correo Alternativo:</b> <span
+                                                class="float-right">{{user.mail_sec}}</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Teléfono:</b> <span class="float-right">{{user.contact}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+
+                            <!-- About Me Box -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Sobre Mi</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <p class="text-muted">
+                                        {{user.about_me}}
+                                    </p>
+                                    <hr>
+                                    <strong>Mis habilidades:</strong>
+                                    <p class="text-muted">{{user.habilitie}}</p>
+                                    <hr>
+                                    <strong>Mis Intereses:</strong>
+                                    <p class="text-muted">{{user.interest}}</p>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="card">
+                                <div class="container">
+                                    <div class="row m-0">
+                                        <div class="col-12 align-items-center p-0">
+                                            <div class="bg-light">
+                                                <div class="card-link">
+                                                    <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start bg-primary">
+                                                        <h5><strong>INSTRUCCIÓN ACADÉMICA</strong></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body bg-light pt-3 pb-0">
+                                        {% for education in educations %}
+                                        <div class="row">
+                                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                                <div class="icon-box">
+                                                    <i class="fas fa-graduation-cap"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="box-element">
+
+                                                    <h4 class="text-uppercase text-dark">{{
+                                                        education.name_institution }}</h4>
+
+                                                    <h4>{{ education.degree }}</h4>
+                                                    Nivel de Instrucción: {{ education.level_education }} <br>
+                                                    {% if (education.end_date == None or education.end_date == "")
+                                                    %}
+                                                    {{ education.start_date.strftime('%d/%m/%Y') }} - Sin Finalizar
+                                                    <br>
+                                                    {% else %}
+                                                    {{ education.start_date.strftime('%d/%m/%Y') }} - {{
+                                                    education.end_date.strftime('%d/%m/%Y')
+                                                    }} <br>
+                                                    {% endif %}
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                                <div class="container">
+                                    <div class="row m-0">
+                                        <div class="col-12 align-items-center p-0">
+                                            <div class="bg-light">
+                                                <div class="card-link">
+                                                    <div class="navbar-brand p-2 m-0 text-dark d-flex justify-content-start bg-success">
+                                                        <h5><strong>CURSOS Y CAPACITACIONES</strong></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="card-body bg-light pt-3 pb-0">
+                                            {% for course in courses %}
+                                            <div class="row">
+                                                <div
+                                                    class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                                    <div class="icon-box">
+                                                        <i class="fas fa-chalkboard-teacher"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <div class="box-element">
+
+                                                        <h4 class="text-uppercase text-dark">{{ course.description
+                                                            }}
+                                                        </h4>
+
+                                                        <h4>Área de Capacitación: {{ course.area }}</h4>
+                                                        Horas de Capacitación: {{ course.time }} <br>
+                                                        {{ course.start_date.strftime('%d/%m/%Y') }} - {{
+                                                        course.end_date.strftime('%d/%m/%Y')
+                                                        }}
+                                                        <br>
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row m-0">
+                                        <div class="col-12 align-items-center p-0">
+                                            <div class="bg-light">
+                                                <div class="card-link">
+                                                    <div class="navbar p-2 m-0 text-dark  d-flex justify-content-start bg-info">
+                                                        <h5><strong>INVESTIGACIONES Y PUBLICACIONES</strong></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="card-body bg-light pt-3 pb-0">
+                                            {% for publication in publications %}
+                                            <div class="row">
+                                                <div
+                                                    class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                                    <div class="icon-box">
+                                                        <i class="fas fa-book"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <div class="box-element">
+
+                                                        <h4 class="text-uppercase text-dark">{{ publication.title }}
+                                                        </h4>
+
+                                                        Fecha de publicación: {{
+                                                        publication.pub_date.strftime('%d/%m/%Y')
+                                                        }}<br>
+                                                        DOI: <a class="DOI">{{ publication.link }}</a> <br>
+                                                        <h4>Descipción: </h4>{{ publication.description }} <br>
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row m-0">
+                                        <div class="col-12 align-items-center p-0">
+                                            <div class="bg-light">
+                                                <div class="card-link">
+                                                    <div class="navbar p-2 m-0 text-dark  d-flex justify-content-start bg-gray">
+                                                        <h5><strong>EXPERIENCIAS DE VOLUNTARIADO Y LIDERAZGO</strong>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body bg-light pt-3 pb-0">
+                                        {% for volunteering in volunteerings %}
+                                        <div class="row">
+                                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                                <div class="icon-box">
+                                                    <i class="fas fa-hands-helping"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="box-element">
+
+                                                    <h4 class="text-uppercase text-dark">{{
+                                                        volunteering.organization }}</h4>
+
+                                                    <h4>{{ volunteering.possition }}</h4>
+                                                    {{ volunteering.start_date.strftime('%d/%m/%Y') }} - {{
+                                                    volunteering.end_date.strftime('%d/%m/%Y') }} <br>
+                                                    <h4>Actividades Desempeñadas: </h4>{{ volunteering.activities }}
+                                                    <br>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                                <div class="container">
+                                    <div class="row m-0">
+                                        <div class="col-12 align-items-center p-0">
+                                            <div class="bg-light">
+                                                <div class="card-link">
+                                                    <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start bg-dark">
+                                                        <h5><strong>EXPERIENCIAS LABORALES</strong></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body bg-light pt-3 pb-0">
+                                        {% for experience in experiences %}
+                                        <div class="row">
+                                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                                <div class="icon-box">
+                                                    <i class="fas fa-industry"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="box-element">
+
+                                                    <h4 class="text-uppercase text-dark">{{ experience.company
+                                                        }}
+                                                    </h4>
+
+                                                    <h4>{{ experience.possition }}</h4>
+                                                    Área de servicio: {{ experience.area_e }} <br>
+                                                    {{ experience.start_date_e.strftime('%d/%m/%Y') }} - {{
+                                                    experience.end_date_e.strftime('%d/%m/%Y') }} <br>
+                                                    Tiempo de Servicio: {{ experience.time_e }} años <br>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                                <div class="container">
+                                    <div class="row m-0">
+                                        <div class="col-12 align-items-center p-0">
+                                            <div class="bg-light">
+                                                <div class="card-link">
+                                                    <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start bg-purple">
+                                                        <h5><strong>DESTREZA EN IDIOMAS</strong></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body bg-light pt-3 pb-0">
+                                        {% for language in languages %}
+                                        <div class="row">
+                                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                                <div class="icon-box">
+                                                    <i class="fas fa-language"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="box-element">
+
+                                                    <h4 class="text-uppercase text-dark">{{ language.language }}
+                                                    </h4>
+
+                                                    <h4>{{ language.level }}</h4>
+                                                    Institución de Instrucción: {{ language.study_center }} <br>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                                <div class="container">
+                                    <div class="row m-0">
+                                        <div class="col-12 align-items-center p-0">
+                                            <div class="bg-light">
+                                                <div class="card-link">
+                                                    <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start bg-red">
+                                                        <h5><strong>REFERENCIAS LABORALES</strong></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body bg-light pt-3 pb-0">
+                                        {% for referencew in referencesw %}
+                                        <div class="row">
+                                            <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                                <div class="icon-box">
+                                                    <i class="fas fa-handshake"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="box-element">
+
+                                                    <h4 class="text-uppercase text-dark">{{ referencew.name_rw }}
+                                                    </h4>
+
+                                                    <h3>{{ referencew.profession_rw }}</h3>
+                                                    {{ referencew.company_rw }} <br>
+                                                    {{ referencew.position_rw }} <br>
+                                                    {{ referencew.number_rw }} <br>
+                                                    {{ referencew.mail_rw }} <br>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                                <div class="container">
+                                    <div class="row m-0">
+                                        <div class="col-12 align-items-center p-0">
+                                            <div class="bg-light">
+                                                <div class="card-link">
+                                                    <div class="navbar-brand p-2 m-0 text-dark  d-flex justify-content-start"
+                                                        style="background-color: rgb(243, 168, 30);">
+                                                        <h5><strong>REFERENCIAS PERSONALES</strong></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="collapseOct" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body bg-light pt-3 pb-0">
+                                            {% for referencep in referencesp %}
+                                            <div class="row">
+                                                <div
+                                                    class="col-2 d-flex align-items-center justify-content-center pb-3">
+                                                    <div class="icon-box">
+                                                        <i class="fas fa-handshake"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <div class="box-element">
+
+                                                        <h4 class="text-uppercase text-dark">{{ referencep.name_rp }}
+                                                        </h4>
+
+                                                        <h3>{{ referencep.profession_rp }}</h3>
+                                                        {{ referencep.relation_rp }} <br>
+                                                        {{ referencep.number_rp }} <br>
+                                                        {{ referencep.mail_rp }} <br>
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.tab-content -->
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+        </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-block">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Enginer 2021.</strong><span></span>Generado en <strong>Ucemining.</strong>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+
+</body>
+
+
+</html>

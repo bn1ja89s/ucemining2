@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="keywords"
+        content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Logo Icono -->
+    <link rel="shortcut icon" href="{{ url_for('static',filename='img/web/logo.png')}}">
+    <!-- Favicon icon -->
+    <link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css"
+        href="{{url_for('static', filename='icon/themify-icons/themify-icons.css')}}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='icon/icofont/css/icofont.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='icon/icofont/css/flaticon.css')}}">
+    <!-- Style.css Plantilla -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <!-- BOOSTSTRAP 5 -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+</head>
+
+
+<body>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{url_for('home')}}">
+                <img src="{{ url_for('static',filename='img/web/logo.png')}}" alt="" width="50">
+                UCE MINING
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto navbar-text">
+                    <li class="p-1 nav-item"><a class="nav-link" aria-current="page" href="{{url_for('home')}}">Home</a>
+                    </li>
+                    <li class="p-1 nav-item"><a class="nav-link" href="{{url_for('about')}}">Sobre Nosotros</a></li>
+                    <li class="p-1 nav-item"><a class="nav-link" href="{{url_for('register')}}">Registrarse</a></li>
+                    <li class="p-1 nav-item"><a class="nav-link" href="{{url_for('login')}}">Iniciar Sesión</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-container navbar-wrapper">
+            <div class="pcoded-main-container">
+                <main class="sign-up">
+                    <section class="login p-fixed d-flex text-center common-img-bg" style="position: relative;">
+                        <main role="main" class="container">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            {% for category, message in messages %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{ message }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                            {% block content %}
+                            {% endblock %}
+                        </main>
+
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Custom js BOOSTSTRAP 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
+</body>
+
+</html>

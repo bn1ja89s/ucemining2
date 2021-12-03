@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>ENGINER</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="CodedThemes">
+    <meta name="keywords"
+        content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="CodedThemes">
+    <!-- Favicon icon -->
+    <link rel="icon" href="{{url_for('static', filename='images/favicon.ico')}}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap/css/bootstrap.min.css')}}">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css"
+        href="{{url_for('static', filename='icon/themify-icons/themify-icons.css')}}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='icon/icofont/css/icofont.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='icon/icofont/css/flaticon.css')}}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/jquery.mCustomScrollbar.css')}}">
+</head>
+
+<body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+
+                    <div class="navbar-logo">
+                        
+
+                        <a href="{{url_for('home')}}">
+                            <img class="img-fluid" src="{{url_for('static', filename='images/logo.png')}}"
+                                alt="Theme-Logo" />
+                        </a>
+                        <a class="mobile-options">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li>
+                                <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+
+                            <li class="user-profile header-notification">
+                                <a href="#!">
+                                    <img src="{{url_for('static', filename='images/images.jpg')}}" class="img-radius"
+                                        alt="User-Profile-Image">
+                                    <span>{{user.empresa}}</span>
+                                    <i class="ti-angle-down"></i>
+                                </a>
+                                <ul class="show-notification profile-notification">
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-settings"></i> Configuraciones
+                                        </a>
+                                    </li>
+                                    
+                                    
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-email"></i> Mensajes
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{url_for('logout')}}">
+                                            <i class="ti-layout-sidebar-left"></i> Cerrar Sesión
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    
+                    <div class="">
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <div class="page-body">
+                                        <main role="main" class="container">
+                                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                            {% if messages %}
+                                            {% for category, message in messages %}
+                                            <div class="alert alert-{{ category }}">
+                                                {{ message }}
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                            {% endwith %}
+                                            {% block content %}
+                                            {% endblock %}
+                                    </div>
+                                </div>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal start -->
+    <div class="modal fade modal-icon" id="myModalLabel1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">RESUMEN DE SELECCIÓN</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="pcoded-submenu">
+                        <li class="pcoded-hasmenu "><strong>CARRERA:</strong></li>
+                        <li class="pcoded-hasmenu ">Ingeniería de Minas</li>
+                        <hr>
+                    </ul>
+                    <ul class="pcoded-submenu">
+                        <li class="pcoded-hasmenu "><strong>EDAD:</strong></li>
+                        <li class="pcoded-hasmenu "> 25 Años</li>
+                        <hr>
+                    </ul>
+                    <ul class="pcoded-submenu">
+                        <li class="pcoded-hasmenu "><strong>EXPERIENCIA:</strong></li>
+                        <li class="pcoded-hasmenu "> 2 Años</li>
+                        <hr>
+                    </ul>
+                    <ul class="pcoded-submenu">
+                        <li class="pcoded-hasmenu "><strong>CONOCIMIENTO:</strong></li>
+                        <li class="pcoded-hasmenu "> Softwar Técnico</li>
+                        <hr>
+                    </ul>
+                    <ul class="pcoded-submenu">
+                        <li class="pcoded-hasmenu "><strong>IDIOMA:</strong></li>
+                        <li class="pcoded-hasmenu "> Inglés</li>
+                        <hr>
+                    </ul>
+                    <ul class="pcoded-submenu">
+                        <li class="pcoded-hasmenu "><strong>TÍTULOS:</strong></li>
+                        <li class="pcoded-hasmenu "> Tercer Nivel</li>
+                        <hr>
+                    </ul>
+
+
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-warning" href="{{url_for('seleccion')}}">Crear Proyecto</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a type="button" class="btn btn-warning" href="{{url_for('seleccion')}}">Filtrar</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal end Filtro -->
+
+    <!-- Modal ? -->
+    <div class="modal fade modal-icon" id="imprimir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Informacion
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal end  -->
+
+
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery-ui/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/popper.js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript"
+        src="{{url_for('static', filename='js/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/modernizr/modernizr.js')}}"></script>
+    <!-- am chart -->
+    <script src="{{url_for('static', filename='pages/widget/amchart/amcharts.min.js')}}"></script>
+    <script src="{{url_for('static', filename='pages/widget/amchart/serial.min.js')}}"></script>
+    <!-- Todo js -->
+    <script type="text/javascript " src="{{url_for('static', filename='pages/todo/todo.js')}}"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="{{url_for('static', filename='pages/dashboard/custom-dashboard.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script type="text/javascript " src="{{url_for('static', filename='js/SmoothScroll.js')}}"></script>
+    <script src="{{url_for('static', filename='js/pcoded.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/demo-12.js')}}"></script>
+    <script src="{{url_for('static', filename='js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+    
+</body>    
+
+</html>
+
+
+

@@ -1,0 +1,70 @@
+{% extends "company/layout.html" %}
+{% block content %}
+<!-- Page-header start -->
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="ti-ruler-pencil bg-c-blue"></i>
+                <div class="d-inline">
+                    <h4>{{car.0}}</h4>
+                    <span>
+                        Universidad Central del Ecuador</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+                <div class="breadcrumb-title">
+                    <span class="f-left m-t-10 text-muted">
+                        <a href="{{url_for('home')}}"><i class="f-16 icofont icofont-home m-r-10"></i></a>
+                        <i class="breadcrumb-item f-16 m-r-10">/</i><a>{{car.1}}</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Page-header end -->
+
+{% for carrera in carreras %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header card">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <a href="{{url_for('perfil_fil', user_fil = carrera.username, user_car = carrera.career)}}">
+                            <img src="{{url_for('static', filename='img/profile/' + carrera.photo +'.jpg')}}" title="{{carrera.username}}" class="rounded-circle" style="width: 150px; height: 150px; background-repeat: no-repeat; background-position: 50%; background-size: 100% auto;">
+                        </a>
+                        <div class="card-block">
+                            <a href="{{url_for('perfil_fil', user_fil = carrera.username, user_car = carrera.career)}}">
+                                <span class="text-c-blue f-w-600">
+                                    <h4>{{carrera.firstname}} {{carrera.lastname}}</h4>
+                                </span>
+                            </a>
+                            <h5>{{carrera.career}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="page-header-breadcrumb">
+                        <div class="breadcrumb-title">
+                            <span class="f-left m-t-10 text-muted">
+                                <a><i class="f-16 ti-user m-r-10"></i></a>
+                                <i class="breadcrumb-item f-16 m-r-10"></i><a>{{carrera.user_type}}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- card1 start -->
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "company/layout.html" %}
+{% block content %}
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="ti-book bg-c-blue"></i>
+                <div class="d-inline">
+                    <h4>CARRERAS DE FIGEMPA</h4>
+                    <span>
+                        Universidad Central del Ecuador</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+                <div class="breadcrumb-title">
+                    <span class="f-left m-t-10 text-muted">
+                        <a href="{{url_for('home')}}"><i class="f-16 icofont icofont-home m-r-10"></i></a>
+                        
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- card1 start  Mineros-->
+    <div class="col-md-6 col-xl-3">
+        <div class="card widget-card-1">
+            <div class="card-block-small">
+                <a href="{{url_for('Minas')}}">
+                    <i class="icofont flaticon-casco bg-c-blue card1-icon"></i>
+                </a>
+                <a href="{{url_for('Minas')}}">
+                    <span class="text-c-blue f-w-600">
+                        <h5>MINAS</h5>
+                    </span></a>
+                <hr />
+                <h6><a ><span class="text-c-blue f-w-600">{{contarMin.0}}</span></a>
+                    PROFESIONALES
+                </h6>
+                <h6><a ><span class="text-c-blue f-w-600">{{contarMin.1}}</span></a> EGRESADOS
+                </h6>
+                <h6><a ><span class="text-c-blue f-w-600">{{contarMin.2}}</span></a>
+                    ESTUDIANTES
+                </h6>
+            </div>
+        </div>
+    </div>
+    <!-- card1 end -->
+    <!-- card1 start Petróleos-->
+    <div class="col-md-6 col-xl-3">
+        <div class="card widget-card-1">
+            <div class="card-block-small">
+                <a href="{{url_for('Geologia')}}">
+                    <i class="icofont icofont-mining bg-c-yellow card1-icon"></i>
+                </a>
+                <a href="{{url_for('Geologia')}}">
+                    <span class="text-c-yellow f-w-600">
+                        <h5>GEOLOGÍA</h5>
+                    </span></a>
+                <hr />
+                <h6><a ><span class="text-c-yellow f-w-600">{{contarGeo.0}}</span></a>
+                    PROFESIONALES
+                </h6>
+                <h6><a ><span class="text-c-yellow f-w-600">{{contarGeo.1}}</span></a>
+                    EGRESADOS
+                </h6>
+                <h6><a ><span class="text-c-yellow f-w-600">{{contarGeo.2}}</span></a>
+                    ESTUDIANTES
+                </h6>
+            </div>
+        </div>
+    </div>
+    <!-- card1 end -->
+    <!-- card1 start Petróleos-->
+    <div class="col-md-6 col-xl-3">
+        <div class="card widget-card-1">
+            <div class="card-block-small">
+                <a href="{{url_for('Petroleos')}}">
+                    <i class="icofont flaticon-p bg-c-pink card1-icon"></i>
+                </a>
+                <a href="{{url_for('Petroleos')}}">
+                    <span class="text-c-pink f-w-600">
+                        <h5>PETRÓLEOS</h5>
+                    </span></a>
+                <hr />
+                <h6><a ><span class="text-c-pink f-w-600">{{contarPetro.0}}</span></a>
+                    PROFESIONALES
+                </h6>
+                <h6><a ><span class="text-c-pink f-w-600">{{contarPetro.1}}</span></a> EGRESADOS
+                </h6>
+                <h6><a ><span class="text-c-pink f-w-600">{{contarPetro.2}}</span></a>
+                    ESTUDIANTES
+                </h6>
+            </div>
+        </div>
+    </div>
+    <!-- card1 end -->
+    <!-- card1 start ambiental -->
+    <div class="col-md-6 col-xl-3">
+        <div class="card widget-card-1">
+            <div class="card-block-small">
+                <a href="{{url_for('Ambiental')}}">
+                    <i class="icofont icofont-leaf bg-c-green card1-icon"></i>
+                </a>
+                <a href="{{url_for('Ambiental')}}">
+                    <span class="text-c-green f-w-600">
+                        <h5>AMBIENTAL</h5>
+                    </span></a>
+                <hr />
+                <h6><a ><span class="text-c-green f-w-600">{{contarAmb.0}}</span></a>
+                    PROFESIONALES
+                </h6>
+                <h6><a><span class="text-c-green f-w-600">{{contarAmb.1}}</span></a>
+                    EGRESADOS
+                </h6>
+                <h6><a><span class="text-c-green f-w-600">{{contarAmb.2}}</span></a>
+                    ESTUDIANTES
+                </h6>
+            </div>
+        </div>
+    </div>
+    <!-- card1 end -->
+</div>
+
+
+{% endblock %}

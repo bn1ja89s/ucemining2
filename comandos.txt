@@ -1,0 +1,104 @@
+Crear entorno virtual
+virtualenv env
+PDF
+sudo apt-get install wkhtmltopdf
+
+Ejecutar entorno virtual
+
+source mvi/Scripts/activate
+mvi\Scripts\activate.bat
+set FLASK_ENV=production
+set FLASK_APP=app.py
+set FLASK_ENV=development
+flask run
+
+Desactivar 
+deactivate
+
+pip install virtualenv
+er)
+$ git init
+git add -A
+
+python -m venv mvi
+
+
+Guía rápida (cheat sheet) de virtualenv y pip
+🎯 Instalar virtualenv:
+
+$> pip install virtualenv
+🎯 Crear entorno virtual:
+
+$> virtualenv env
+🎯 Crear entorno virtual especificando el intérprete:
+
+$> virtualenv -p ruta/interprete/python env
+🎯 Crear entorno virtual heredando las librerías del sistema (no recomendado):
+
+$> virtualenv --system-site-packages env
+🎯 Activar el entorno virtual en Linux/Mac:
+
+$> source env/bin/activate
+🎯 Activar el entorno virtual en Windows:
+
+$> env\Scripts\activate.bat
+🎯 Salir del entorno virtual:
+
+$> deactivate
+🎯 Instalar un paquete/librería (por ejemplo, flask):
+
+$> pip install flask
+🎯 Instalar una versión concreta de un paquete/librería:
+
+$> pip install flask==1.0.1
+🎯 Actualizar la versión de un paquete/librería:
+
+$> pip install flask -U
+🎯 Desinstalar una librería:
+
+$> pip uninstall flask
+🎯 Listar todas las librerías:
+
+$> pip list
+🎯 Listar todos los paquetes/librerías en formato requirements.txt:
+
+$> pip freeze
+🎯 Crear/Actualizar el fichero requirements.txt:
+
+$> pip freeze > requirements.txt
+🎯 Mostrar la información de un paquete/librería:
+
+$> pip show flask
+
+
+
+source mvi/Scripts/activate
+
+sudo apt install python3-flask
+
+http://18.219.166.35:8080/
+http://172.31.30.245:8080/
+
+phpmyadmin
+root
+ucemining
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'ucemining';
+
+
+usuario
+u8afqm51hf1iuji6
+acroming_u8afqm51hf1iuji6
+contraseña
+JMorwFcnW4fYwjp5PLQx
+
+
+
+http://localhost:3307/
+33060
+
+
+sudo apt update
+sudo apt install php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip
+//reiniciar apache
+systemctl restart apache2

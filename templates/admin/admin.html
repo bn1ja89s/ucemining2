@@ -1,0 +1,162 @@
+{% extends "admin/admin-layout.html" %}
+{% block content %}
+<!-- Page-header start -->
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="ti-user bg-youtube"></i>
+                <div class="d-inline">
+                    <h4>ADMINISTRADOR</h4>
+                    <span>
+                        PANEL DE CONTROL</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+                <div class="breadcrumb-title">
+                    <span class="f-left m-t-10 text-muted">
+                        <a href="{{url_for('home')}}"><i class="f-16 icofont icofont-home m-r-10"></i></a>
+                        <i class="breadcrumb-item f-16 m-r-10">/</i><a>Filtro</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page-header end -->
+
+<div class="page-body">
+    <!-- Basic table card start -->
+    <div class="card">
+        <div class="card-header">
+            <h5>TABLA</h5>
+            <span>Usuarios</span>
+            <div class="card-header-right"></div>
+        </div>
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Carrera</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for carrera in carreras %}
+                        <tr>
+                            <th scope="row">{{carrera.id}}</th>
+                            <td>{{carrera.firstname}}</td>
+                            <td>{{carrera.lastname}}</td>
+                            <td>{{carrera.username}}</td>
+                            <td>{{carrera.email}}</td>
+                            <td>{{carrera.career}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5>TABLA</h5>
+            <span>Empresas</span>
+            <div class="card-header-right"></div>
+        </div>
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Empresa</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for empresa in empresas %}
+                        <tr>
+                            <th scope="row">{{empresa.id}}</th>
+                            <td>{{empresa.empresa}}</td>
+                            <td>{{empresa.email}}</td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">TABLA 3</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Carrera</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for carrera in carreras %}
+                                <tr>
+                                    <th scope="row">{{carrera.id}}</th>
+                                    <td>{{carrera.firstname}}</td>
+                                    <td>{{carrera.lastname}}</td>
+                                    <td>{{carrera.username}}</td>
+                                    <td>{{carrera.email}}</td>
+                                    <td>{{carrera.career}}</td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Carrera</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+
+
+{% endblock %}

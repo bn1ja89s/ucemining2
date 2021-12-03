@@ -1,0 +1,40 @@
+{% extends "company/layout.html" %}
+{% block content %}
+{% for u in us %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header card">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <a href="{{url_for('home')}}">
+                            <img src="{{url_for('static', filename='img/profile/' + u.photo +'.jpg')}}" title="{{u.username}}" class="rounded-circle" style="width: 150px; height: 150px; background-repeat: no-repeat; background-position: 50%; background-size: 100% auto;">
+                        </a>
+                        <div class="card-block">
+                            <a href="{{url_for('perfil_fil', user_fil = u.username, user_car = u.career)}}">
+                                <span class="text-c-blue f-w-600">
+                                    <h4>{{u.firstname}} {{u.lastname}}</h4>
+                                </span>
+                            </a>
+                            <h5>{{u.career}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="page-header-breadcrumb">
+                        <div class="breadcrumb-title">
+                            <span class="f-left m-t-10 text-muted">
+                                <a><i class="f-16 ti-user m-r-10"></i></a>
+                                <i class="breadcrumb-item f-16 m-r-10"></i><a>{{u.user_type}}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- card1 start -->
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "company/layout.html" %}
+{% block content %}
+
+ 
+<div class="page-header card">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <i class="ti-ruler-pencil bg-c-green"></i>
+                <div class="d-inline">
+                    <h4>FILTRO</h4>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+                <div class="breadcrumb-title">
+                    <span class="f-left m-t-10 text-muted">
+                        <a href="{{url_for('home')}}"><i class="f-16 icofont icofont-home m-r-10"></i></a>
+                        <i class="breadcrumb-item f-16 m-r-10">/</i><a>Filtro</a>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Basic Form Inputs card start -->
+            <div class="card">
+                
+                <div class="card-block">
+                    <h4 class="sub-title">Basic Inputs</h4>
+                    <form class="md-float-material" method="POST" action="{{ url_for('seleccion') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Carrera: </label>
+                            <div class="col-sm-10">
+                                {{ form.carrera(class="form-control", style="height: 45px; width: 400px;") }}
+                            </div>
+                            <label class="col-sm-2 col-form-label">Usuario: </label>
+                            <div class="col-sm-10">
+                                {{ form.tipo_u(class="form-control", style="height: 45px; width: 400px;") }}
+                            </div>
+                            <label class="col-sm-2 col-form-label">Nivel: </label>
+                            <div class="col-sm-10">
+                                {{ form.nivel_i(class="form-control", style="height: 45px; width: 400px;") }}
+                            </div>
+                            <label class="col-sm-2 col-form-label">Capacitacion: </label>
+                            <div class="col-sm-10">
+                                {{ form.area_c(class="form-control", style="height: 45px; width: 400px;") }}
+                            </div>
+                            <label class="col-sm-2 col-form-label">Experiencia Laboral: </label>
+                            <div class="col-sm-10">
+                                {{ form.area_t(class="form-control", style="height: 45px; width: 400px;") }}
+                            </div>
+                            <label class="col-sm-2 col-form-label">Idioma: </label>
+                            <div class="col-sm-10">
+                                {{ form.idioma_f(class="form-control", style="height: 45px; width: 400px;") }}
+                            </div>
+                        </div>
+                        <div>
+                            {{ form.submit (class="btn btn-outline-info") }}
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for u in us %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header card">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <a href="{{url_for('perfil_fil', user_fil = u.username, user_car = u.career)}}">
+                            <img src="{{url_for('static', filename='img/profile/' + u.photo +'.jpg')}}" title="{{u.username}}" class="rounded-circle" style="width: 150px; height: 150px; background-repeat: no-repeat; background-position: 50%; background-size: 100% auto;">
+                        </a>
+                        <div class="card-block">
+                            <a href="{{url_for('perfil_fil', user_fil = u.username, user_car = u.career)}}">
+                                <span class="text-c-blue f-w-600">
+                                    <h4>{{u.firstname}} {{u.lastname}}</h4>
+                                </span>
+                            </a>
+                            <h5>{{u.career}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="page-header-breadcrumb">
+                        <div class="breadcrumb-title">
+                            <span class="f-left m-t-10 text-muted">
+                                <a><i class="f-16 ti-user m-r-10"></i></a>
+                                <i class="breadcrumb-item f-16 m-r-10"></i><a>{{u.user_type}}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- card1 start -->
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

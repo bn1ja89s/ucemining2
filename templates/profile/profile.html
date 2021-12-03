@@ -1,0 +1,1612 @@
+{% extends "profile/layout_profile.html" %}
+{% block title %}MI PERFIL | #{{ user.username }}{% endblock %}
+{% block content %}
+<script type="text/javascript">
+  function Deshabilitar(flexCheckChecked) {
+    var input_date = document.getElementById("input_date");
+    input_date.disabled = flexCheckChecked.checked ? true : false;
+    if (!input_date.disabled) {
+      input_date.focus()
+    }
+  }
+</script>
+<div class="container">
+  <div class="row pt-3">
+    <!-- MENSAJE DESPLEGABLE -->
+    <!-- INFORMACIÓN PERSONAL -->
+    <div class="col-xl-4 col-md-12">
+      <div class="container-fluid bg-dark" style="min-height:1500px; max-height:5000px">
+        <div class="row justify-content-center pt-3">
+          <h3 class="text-light text-capitalize"><b>{{ user.firstname }}</b></h3>
+        </div>
+        <div class="row justify-content-center pt-3">
+          <h4 class="text-light text-capitalize">{{ user.lastname }}</h4>
+        </div>
+        <div class="row justify-content-center p-3">
+          <a href="" type="button" class="btn btn-inverse btn btn-secondary rounded-circle" data-bs-toggle="modal"
+            data-bs-target="#upload" style="background-color: transparent; border:transparent"><img
+              src="{{ url_for('static',  filename='img/profile/' + image_name )}}" class="rounded-circle"
+              style="width: 250px; height: 250px; background-repeat: no-repeat; background-position: 50%; background-size: 100% auto;"></a>
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          <a class="col" href="{{ user.linkendin }}"><i class="fab fa-linkedin"></i></a>
+          <a class="col" href="{{ user.instagram }}"><i class="fab fa-instagram"></i></a>
+          <a class="col" href="{{ user.facebook }}"><i class="fab fa-facebook-square"></i></a>
+          <a class="col" href="{{ user.twitter }}"><i class="fab fa-twitter-square"></i></a>
+        </div>
+        <div class="row justify-content-center pt-3">
+          <a class="" href="#form_contact" data-bs-toggle="modal" data-bs-target="#bd-con-modal-lg">INFORMACION
+            PERSONAL</a>
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          {% if user.age == None or user.age == '' %}
+          <b class="text-light"><ins>Edad:</ins></b>
+          <p class="text-white" style="margin: 0px;"> Cuántos años tienes?</p>
+          {% else %}
+          <b class="text-light"><ins>Edad:</ins></b>
+          <p class="text-white" style="margin: 0px;">&nbsp&nbsp{{ user.age }}</p>
+          {% endif %}
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          {% if user.user_type == None or user.user_type == '' %}
+          <b class="text-light"><ins>Estatus: </ins></b>
+          <p class="text-white" style="margin: 0px;"> Cuál es tu situación?</p>
+          {% else %}
+          <b class="text-light"><ins>Estatus: </ins></b>
+          <p class="text-white" style="margin: 0px;">&nbsp&nbsp{{ user.user_type }}</p>
+          {% endif %}
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          {% if user.contact == None or user.contact == '' %}
+          <b class="text-light"><ins>Teléfonos: </ins></b>
+          <p class="text-white" style="margin: 0px;"> A dónde podemos llamarte?</p>
+          {% else %}
+          <b class="text-light"><ins>Teléfonos: </ins></b>
+          <p class="text-white" style="margin: 0px;">&nbsp&nbsp{{ user.contact }}</p>
+          {% endif %}
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          {% if user.mail_sec == None or user.mail_sec == '' %}
+          <b class="text-light"><ins>Mail: </ins></b>
+          <p class="text-white" style="margin: 0px;"> A qué correo podemos escribirte?</p>
+          {% else %}
+          <b class="text-light"><ins>Mail: </ins></b><br>
+          <p class="text-white" style="margin: 0px;">{{ user.mail_sec }}</p>
+          {% endif %}
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          <b class="text-light"><ins>Sobre mi: </ins></b>
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          {% if user.about_me == None or user.about_me == '' %}
+          <p class="text-white" style="margin: 0px;">Cuéntanos un poco sobre ti...</p>
+          {% else %}
+          <p class="text-white" style="margin: 0px;">{{ user.about_me }}</p>
+          {% endif %}
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          <b class="text-light"><ins>Mis habilidades: </ins></b>
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          {% if user.habilitie == None or user.habilitie == '' %}
+          <p class="text-white" style="margin: 0px;">Qué te diferencia del resto?...</p>
+          {% else %}
+          <p class="text-white" style="margin: 0px;">{{ user.habilitie }}</p>
+          {% endif %}
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          <b class="text-light"><ins>Mis intereses: </ins></b>
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          {% if user.interest == None or user.interest == '' %}
+          <p class="text-white" style="margin: 0px;">Qué te apasiona?...</p>
+          {% else %}
+          <p class="text-white" style="margin: 0px;">{{ user.interest }}</p>
+          {% endif %}
+        </div>
+        <div class="row justify-content-left pt-3 pl-3 pr-3">
+          <b class="text-light"><ins>Hoja de Vida (PDF)</ins></b>
+          {% if user.cv == None or user.cv == '' %}
+          <div class="mt-2">
+            <div class="row">
+              <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                <div class="icon-box">
+                  <i class="far fa-file" style="color: blue;"></i>
+                </div>
+              </div>
+              <div class="col-10">
+                <a class="" href="#form_contact" data-bs-toggle="modal" data-bs-target="#bd-cv-modal-lg">Cargar PDF</a>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="mt-2">
+            <div class="row">
+              <div class="col-2 d-flex align-items-center justify-content-center">
+                <div class="icon-box">
+                  <i class="far fa-file" style="color: green;"></i>
+                </div>
+              </div>
+              <div class="col-10">
+                <a class="" href="#form_contact" data-bs-toggle="modal" data-bs-target="#bd-cv-modal-lg" style="color: green;">{{ cvname }}</a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- MODAL CV -->
+    <div class="modal fade" id="bd-cv-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelCon"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><b>CARGAR PDF MAX. 1MB: </b></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{url_for('perfil', username = username)}}" method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+              <div class="modal-body">
+                <ul class="pcoded-submenu">
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"> Subir Archivo </label>
+                    <div class="col-sm-10">
+                      <input type="file" name="archivopdf" accept=".pdf">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Subir">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </ul>
+              </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------------->
+    <!-- MODAL INFORMACION PERSONAL -->
+    <div class="modal fade" id="bd-con-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelCon"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><b>INFORMACIÓN PERSONAL Y DE CONTACTO: </b></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" class="">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+              <div class="label-form">
+                {{ formcon.age.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.age.errors %}
+                {{ formcon.age(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.age.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.age(class="input") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.user_type.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.user_type.errors %}
+                {{ formcon.user_type(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.user_type.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.user_type(class="input") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.contact.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.contact.errors %}
+                {{ formcon.contact(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.contact.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.contact(class="input") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.mail_sec.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.mail_sec.errors %}
+                {{ formcon.mail_sec(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.mail_sec.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.mail_sec(class="input") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.linkendin.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.linkendin.errors %}
+                {{ formcon.linkendin(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.linkendin.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.linkendin(class="input align-top") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.instagram.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.instagram.errors %}
+                {{ formcon.instagram(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.instagram.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.instagram(class="input align-top") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.facebook.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.facebook.errors %}
+                {{ formcon.facebook(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.facebook.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.facebook(class="input align-top") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.twitter.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.twitter.errors %}
+                {{ formcon.twitter(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.twitter.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.twitter(class="input align-top") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.about_me.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.about_me.errors %}
+                {{ formcon.about_me(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.about_me.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.about_me(class="input-d align-top") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.habilitie.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.habilitie.errors %}
+                {{ formcon.habilitie(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.habilitie.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.habilitie(class="input-d align-top") }}
+                {% endif %}
+              </div>
+              <div class="label-form">
+                {{ formcon.interest.label(class="message-text") }}
+              </div>
+              <div class="input-form">
+                {% if formcon.interest.errors %}
+                {{ formcon.interest(class="message-error") }}
+                <div class="invalid-feedback">
+                  {% for error in formcon.interest.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ formcon.interest(class="input-d align-top") }}
+                {% endif %}
+              </div>
+              <div class="submit-formpub d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                {{ formcon.submit(class="btn btn-primary m-3 text-uppercase") }}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------------------------->
+    <!-- Modal ? -->
+    <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="modaldestino" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal1">Subir Imagen  - Tamaño Carnet (Solo JPG)</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="{{url_for('perfil', username = username)}}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+            <div class="modal-body">
+              <ul class="pcoded-submenu">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label"> Subir Archivo </label>
+                  <div class="col-sm-10">
+                    <input type="file" name="archivo" accept=".jpg">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-primary" value="Subir">
+                  <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                </div>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal end  -->
+    <!------------------------->
+    <!-- HOJA DE VIDA -->
+    <!-- INFORMACION EDUCACION -->
+    <div class="pb-2 col-xl-8 col-md-12">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="accordionOne">
+              <div class="card">
+                <div class="row m-0">
+                  <div class="col-10 align-items-center p-0">
+                    <div class="bg-light">
+                      <a class="card-link" data-bs-toggle="collapse" href="#collapseOne">
+                        <div class="navbar-brand p-2 m-0 text-dark btn btn-secondary d-flex justify-content-start"
+                          style="width: 100%; border-radius:0%">
+                          <h5><strong>INSTRUCCIÓN ACADÉMICA</strong></h5>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-center bg-secondary p-0">
+                    <div class="new">
+                      <a class="" href="#form_education" data-bs-toggle="modal" data-bs-target="#bd-edu-modal-lg"><i
+                          class="fas fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                  <div class="card-body bg-light pt-3 pb-0">
+                    {% for education in educations %}
+                    <div class="row">
+                      <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                        <div class="icon-box">
+                          <i class="fas fa-graduation-cap"></i>
+                        </div>
+                      </div>
+                      <div class="col-10">
+                        <div class="box-element">
+                          <a class="" href="{{url_for('edit_education', education_id=education.id)}}">
+                            <h4 class="text-uppercase text-dark">{{ education.name_institution }}</h4>
+                          </a>
+                          <h4>{{ education.degree }}</h4>
+                          Nivel de Instrucción: {{ education.level_education }} <br>
+                          {% if (education.end_date == None or education.end_date == "") %}
+                          {{ education.start_date.strftime('%d/%m/%Y') }} - Sin Finalizar <br>
+                          {% else %}
+                          {{ education.start_date.strftime('%d/%m/%Y') }} - {{ education.end_date.strftime('%d/%m/%Y')
+                          }} <br>
+                          {% endif %}
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL EDUCATION -->
+      <div class="modal fade" id="bd-edu-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelEdu"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>NUEVA INSTRUCCIÓN ACADÉMICA: </b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" class="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                  {{ formedu.level_education.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formedu.level_education.errors %}
+                  {{ formedu.level_education(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formedu.level_education.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formedu.level_education(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formedu.name_institution.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formedu.name_institution.errors %}
+                  {{ formedu.name_institution(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formedu.name_institution.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formedu.name_institution(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formedu.degree.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formedu.degree.errors %}
+                  {{ formedu.degree(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formedu.degree.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formedu.degree(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formedu.start_date.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formedu.start_date.errors %}
+                  {{ formedu.start_date(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formedu.start_date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formedu.start_date(class="input datepicker") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formedu.end_date.label(class="message-text") }}
+                  <input class="" type="checkbox" value="" id="flexCheckChecked" onclick="Deshabilitar(this)"><label
+                    class="label-form" style="font-size: 15px;">En Proceso</label>
+                </div>
+                <div class="input-form">
+                  {% if formedu.end_date.errors %}
+                  {{ formedu.end_date(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formedu.end_date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formedu.end_date(class="datepicker input",id='input_date',disable="disabled") }}
+                  {% endif %}
+                </div>
+                <div class="submit-form d-flex justify-content-center">
+                  <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                  {{ formedu.submit(class="btn btn-primary m-3 text-uppercase") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!------------------->
+      <!-- CURSOS Y CAPACITACIONES -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="accordionTwo">
+              <div class="card">
+                <div class="row m-0">
+                  <div class="col-10 align-items-center p-0">
+                    <div class="bg-light">
+                      <a class="card-link" data-bs-toggle="collapse" href="#collapseTwo">
+                        <div class="navbar-brand p-2 m-0 text-dark btn btn-secondary d-flex justify-content-start"
+                          style="width: 100%; border-radius:0%">
+                          <h5><strong>CURSOS Y CAPACITACIONES</strong></h5>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-center bg-secondary p-0">
+                    <div class="new">
+                      <a class="" href="#form_course" data-bs-toggle="modal" data-bs-target="#bd-cou-modal-lg"><i
+                          class="fas fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseTwo" class="collapse show" data-parent="#accordion">
+                  <div class="card-body bg-light pt-3 pb-0">
+                    {% for course in courses %}
+                    <div class="row">
+                      <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                        <div class="icon-box">
+                          <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                      </div>
+                      <div class="col-10">
+                        <div class="box-element">
+                          <a class="" href="{{url_for('edit_course', course_id=course.id)}}">
+                            <h4 class="text-uppercase text-dark">{{ course.description }}</h4>
+                          </a>
+                          <h4>Área de Capacitación: {{ course.area }}</h4>
+                          Horas de Capacitación: {{ course.time }} <br>
+                          {{ course.start_date.strftime('%d/%m/%Y') }} - {{ course.end_date.strftime('%d/%m/%Y') }} <br>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL-COURSE -->
+      <div class="modal fade" id="bd-cou-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelCou"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>NUEVA CAPACITACIÓN: </b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" class="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                  {{ formcou.description.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formcou.description.errors %}
+                  {{ formcou.description(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formcou.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formcou.description(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formcou.area.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formcou.area.errors %}
+                  {{ formcou.area(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formcou.area.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formcou.area(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formcou.start_date.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formcou.start_date.errors %}
+                  {{ formcou.start_date(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formcou.start_date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formcou.start_date(class="datepicker input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formcou.end_date.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formcou.end_date.errors %}
+                  {{ formcou.end_date(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formcou.end_date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formcou.end_date(class="datepicker input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formcou.time.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formcou.time.errors %}
+                  {{ formcou.time(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formcou.time.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formcou.time(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="submit-form d-flex justify-content-center">
+                  <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                  {{ formcou.submit(class="btn btn-primary m-3 text-uppercase") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!------------------>
+      <!-- INVESTIGACIONES Y PUBLICACIONES -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="accordionTree">
+              <div class="card">
+                <div class="row m-0">
+                  <div class="col-10 align-items-center p-0">
+                    <div class="bg-light">
+                      <a class="card-link" data-bs-toggle="collapse" href="#collapseTree">
+                        <div class="navbar p-2 m-0 text-dark btn btn-secondary d-flex justify-content-start"
+                          style="width: 100%; border-radius:0%;word-wrap: break-word;">
+                          <h5><strong>INVESTIGACIONES Y PUBLICACIONES</strong></h5>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-center bg-secondary p-0">
+                    <div class="new">
+                      <a class="" href="#form_publication" data-bs-toggle="modal" data-bs-target="#bd-pub-modal-lg"><i
+                          class="fas fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseTree" class="collapse show" data-parent="#accordion">
+                  <div class="card-body bg-light pt-3 pb-0">
+                    {% for publication in publications %}
+                    <div class="row">
+                      <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                        <div class="icon-box">
+                          <i class="fas fa-book"></i>
+                        </div>
+                      </div>
+                      <div class="col-10">
+                        <div class="box-element">
+                          <a class="" href="{{url_for('edit_publication', publication_id=publication.id)}}">
+                            <h4 class="text-uppercase text-dark">{{ publication.title }}</h4>
+                          </a>
+                          Fecha de publicación: {{ publication.pub_date.strftime('%d/%m/%Y') }}<br>
+                          DOI: <a class="DOI" href="{{ publication.link }}">{{ publication.link }}</a> <br>
+                          <h4>Descipción: </h4>{{ publication.description }} <br>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL PUBLICATIONS -->
+      <div class="modal fade" id="bd-pub-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelPub"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>NUEVA COLABORACIÓN CIENTÍFICA: </b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                  {{ formpub.title.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formpub.title.errors %}
+                  {{ formpub.title(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formpub.title.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formpub.title(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formpub.pub_date.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formpub.pub_date.errors %}
+                  {{ formpub.pub_date(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formpub.pub_date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formpub.pub_date(class="datepicker input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formpub.link.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formpub.link.errors %}
+                  {{ formpub.link(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formpub.link.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formpub.link(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formpub.description.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formpub.description.errors %}
+                  {{ formpub.description(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formpub.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formpub.description(class="input-d") }}
+                  {% endif %}
+                </div>
+                <div class="submit-form d-flex justify-content-center">
+                  <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                  {{ formpub.submit(class="btn btn-primary m-3 text-uppercase") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!----------------------->
+      <!-- EXPERIENCIAS DE VOLUNTARIADO Y LIDERAZGO -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="accordionFour">
+              <div class="card">
+                <div class="row m-0">
+                  <div class="col-10 align-items-center p-0">
+                    <div class="bg-light">
+                      <a class="card-link" data-bs-toggle="collapse" href="#collapseFour">
+                        <div class="navbar p-2 m-0 text-dark btn btn-secondary d-flex justify-content-start"
+                          style="width: 100%; border-radius:0%">
+                          <h5><strong>EXPERIENCIAS DE VOLUNTARIADO Y LIDERAZGO</strong></h5>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-center bg-secondary p-0">
+                    <div class="new">
+                      <a class="" href="#form_volunteering" data-bs-toggle="modal" data-bs-target="#bd-vol-modal-lg"><i
+                          class="fas fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseFour" class="collapse show" data-parent="#accordion">
+                  <div class="card-body bg-light pt-3 pb-0">
+                    {% for volunteering in volunteerings %}
+                    <div class="row">
+                      <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                        <div class="icon-box">
+                          <i class="fas fa-hands-helping"></i>
+                        </div>
+                      </div>
+                      <div class="col-10">
+                        <div class="box-element">
+                          <a class="" href="{{url_for('edit_volunteering', volunteering_id=volunteering.id)}}">
+                            <h4 class="text-uppercase text-dark">{{ volunteering.organization }}</h4>
+                          </a>
+                          <h4>{{ volunteering.possition }}</h4>
+                          {{ volunteering.start_date.strftime('%d/%m/%Y') }} - {{
+                          volunteering.end_date.strftime('%d/%m/%Y') }} <br>
+                          <h4>Actividades Desempeñadas: </h4>{{ volunteering.activities }} <br>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL VOLUNTEERING -->
+      <div class="modal fade" id="bd-vol-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelVol"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>NUEVA EXPERIENCIA DE LIDERAZGO: </b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                  {{ formvol.organization.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formvol.organization.errors %}
+                  {{ formvol.organization(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formvol.organization.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formvol.organization(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formvol.possition.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formvol.possition.errors %}
+                  {{ formvol.possition(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formvol.possition.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formvol.possition(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formvol.start_date.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formvol.start_date.errors %}
+                  {{ formvol.start_date(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formvol.start_date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formvol.start_date(class="datepicker input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formvol.end_date.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formvol.end_date.errors %}
+                  {{ formvol.end_date(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formvol.end_date.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formvol.end_date(class="datepicker input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formvol.activities.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formvol.activities.errors %}
+                  {{ formvol.activities(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formvol.activities.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formvol.activities(class="input-d") }}
+                  {% endif %}
+                  <div class="submit-form d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                    {{ formvol.submit(class="btn btn-primary m-3 text-uppercase") }}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!------------------------>
+      <!-- EXPERIENCIAS LABORALES -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="accordionFive">
+              <div class="card">
+                <div class="row m-0">
+                  <div class="col-10 align-items-center p-0">
+                    <div class="bg-light">
+                      <a class="card-link" data-bs-toggle="collapse" href="#collapseFive">
+                        <div class="navbar-brand p-2 m-0 text-dark btn btn-secondary d-flex justify-content-start"
+                          style="width: 100%; border-radius:0%">
+                          <h5><strong>EXPERIENCIAS LABORALES</strong></h5>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-center bg-secondary p-0">
+                    <div class="new">
+                      <a class="" href="#form_experience" data-bs-toggle="modal" data-bs-target="#bd-job-modal-lg"><i
+                          class="fas fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseFive" class="collapse show" data-parent="#accordion">
+                  <div class="card-body bg-light pt-3 pb-0">
+                    {% for experience in experiences %}
+                    <div class="row">
+                      <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                        <div class="icon-box">
+                          <i class="fas fa-industry"></i>
+                        </div>
+                      </div>
+                      <div class="col-10">
+                        <div class="box-element">
+                          <a class="" href="{{url_for('edit_experience', experience_id=experience.id)}}">
+                            <h4 class="text-uppercase text-dark">{{ experience.company }}</h4>
+                          </a>
+                          <h4>{{ experience.possition }}</h4>
+                          Área de servicio: {{ experience.area_e }} <br>
+                          {{ experience.start_date_e.strftime('%d/%m/%Y') }} - {{
+                          experience.end_date_e.strftime('%d/%m/%Y') }} <br>
+                          Tiempo de Servicio: {{ experience.time_e }} años <br>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL EXPERIENCE -->
+      <div class="modal fade" id="bd-job-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelJob"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>NUEVA EXPERIENCIA LABORAL: </b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" id="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                  {{ formjob.company.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formjob.company.errors %}
+                  {{ formjob.company(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formjob.company.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formjob.company(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formjob.area_e.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formjob.area_e.errors %}
+                  {{ formjob.area_e(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formjob.area_e.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formjob.area_e(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formjob.possition.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formjob.possition.errors %}
+                  {{ formjob.possition(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formjob.possition.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formjob.possition(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formjob.start_date_e.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formjob.start_date_e.errors %}
+                  {{ formjob.start_date_e(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formjob.start_date_e.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formjob.start_date_e(class="datepicker input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formjob.end_date_e.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formjob.end_date_e.errors %}
+                  {{ formjob.end_date_e(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formjob.end_date_e.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formjob.end_date_e(class="datepicker input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formjob.time_e.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formjob.time_e.errors %}
+                  {{ formjob.time_e(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formjob.time_e.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formjob.time_e(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="submit-form d-flex justify-content-center">
+                  <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                  {{ formjob.submit(class="btn btn-primary m-3 text-uppercase") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---------------------->
+      <!-- EXPERIENCIA EN IDIOMAS-->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="accordionSex">
+              <div class="card">
+                <div class="row m-0">
+                  <div class="col-10 align-items-center p-0">
+                    <div class="bg-light">
+                      <a class="card-link" data-bs-toggle="collapse" href="#collapseSex">
+                        <div class="navbar-brand p-2 m-0 text-dark btn btn-secondary d-flex justify-content-start"
+                          style="width: 100%; border-radius:0%">
+                          <h5><strong>DESTREZA EN IDIOMAS</strong></h5>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-center bg-secondary p-0">
+                    <div class="new">
+                      <a class="" href="#form_language" data-bs-toggle="modal" data-bs-target="#bd-lan-modal-lg"><i
+                          class="fas fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseSex" class="collapse show" data-parent="#accordion">
+                  <div class="card-body bg-light pt-3 pb-0">
+                    {% for language in languages %}
+                    <div class="row">
+                      <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                        <div class="icon-box">
+                          <i class="fas fa-language"></i>
+                        </div>
+                      </div>
+                      <div class="col-10">
+                        <div class="box-element">
+                          <a class="" href="{{url_for('edit_language', language_id=language.id)}}">
+                            <h4 class="text-uppercase text-dark">{{ language.language }}</h4>
+                          </a>
+                          <h4>{{ language.level }}</h4>
+                          Institución de Instrucción: {{ language.study_center }} <br>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL LANGUAGES -->
+      <div class="modal fade" id="bd-lan-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelLan"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>NUEVA EXPERIENCIA EN IDIOMAS: </b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                  {{ formlan.language.label(class="message-text") }}
+                </div>
+                <div class="input-formlan">
+                  {% if formlan.language.errors %}
+                  {{ formlan.language(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formlan.language.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formlan.language(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formlan.level.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formlan.level.errors %}
+                  {{ formlan.level(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formlan.level.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formlan.level(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formlan.study_center.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formlan.study_center.errors %}
+                  {{ formlan.study_center(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formlan.study_center.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formlan.study_center(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="submit-form d-flex justify-content-center">
+                  <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                  {{ formlan.submit(class="btn btn-primary m-3 text-uppercase") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--------------------->
+      <!-- INFORMACION REFERENCEW -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="accordionOne">
+              <div class="card">
+                <div class="row m-0">
+                  <div class="col-10 align-items-center p-0">
+                    <div class="bg-light">
+                      <a class="card-link" data-bs-toggle="collapse" href="#collapseSep">
+                        <div class="navbar-brand p-2 m-0 text-dark btn btn-secondary d-flex justify-content-start"
+                          style="width: 100%; border-radius:0%">
+                          <h5><strong>REFERENCIAS LABORALES</strong></h5>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-center bg-secondary p-0">
+                    <div class="new">
+                      <a class="" href="#form_referencew" data-bs-toggle="modal" data-bs-target="#bd-refw-modal-lg"><i
+                          class="fas fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseSep" class="collapse show" data-parent="#accordion">
+                  <div class="card-body bg-light pt-3 pb-0">
+                    {% for referencew in referencesw %}
+                    <div class="row">
+                      <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                        <div class="icon-box">
+                          <i class="fas fa-handshake"></i>
+                        </div>
+                      </div>
+                      <div class="col-10">
+                        <div class="box-element">
+                          <a class="" href="{{url_for('edit_referencew', referencew_id=referencew.id)}}">
+                            <h4 class="text-uppercase text-dark">{{ referencew.name_rw }}</h4>
+                          </a>
+                          <h3>{{ referencew.profession_rw }}</h3>
+                          {{ referencew.company_rw }} <br>
+                          {{ referencew.position_rw }} <br>
+                          {{ referencew.number_rw }} <br>
+                          {{ referencew.mail_rw }} <br>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL REFERENCEW -->
+      <div class="modal fade" id="bd-refw-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelRefw"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>NUEVA REFERENCIA LABORAL: </b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" class="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                  {{ formrefw.name_rw.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefw.name_rw.errors %}
+                  {{ formrefw.name_rw(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefw.name_rw.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefw.name_rw(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefw.profession_rw.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefw.profession_rw.errors %}
+                  {{ formrefw.profession_rw(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefw.profession_rw.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefw.profession_rw(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefw.company_rw.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefw.company_rw.errors %}
+                  {{ formrefw.company_rw(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefw.company_rw.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefw.company_rw(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefw.position_rw.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefw.position_rw.errors %}
+                  {{ formrefw.position_rw(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefw.position_rw.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefw.position_rw(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefw.number_rw.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefw.number_rw.errors %}
+                  {{ formrefw.number_rw(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefw.number_rw.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefw.number_rw(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefw.mail_rw.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefw.mail_rw.errors %}
+                  {{ formrefw.mail_rw(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefw.mail_rw.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefw.mail_rw(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="submit-form d-flex justify-content-center">
+                  <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                  {{ formrefw.submit(class="btn btn-primary m-3 text-uppercase") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!------------------->
+      <!-- INFORMACION REFERENCEP -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div id="accordionOne">
+              <div class="card">
+                <div class="row m-0">
+                  <div class="col-10 align-items-center p-0">
+                    <div class="bg-light">
+                      <a class="card-link" data-bs-toggle="collapse" href="#collapseOct">
+                        <div class="navbar-brand p-2 m-0 text-dark btn btn-secondary d-flex justify-content-start"
+                          style="width: 100%; border-radius:0%">
+                          <h5><strong>REFERENCIAS PERSONALES</strong></h5>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-2 d-flex align-items-center justify-content-center bg-secondary p-0">
+                    <div class="new">
+                      <a class="" href="#form_referencep" data-bs-toggle="modal" data-bs-target="#bd-refp-modal-lg"><i
+                          class="fas fa-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseOct" class="collapse show" data-parent="#accordion">
+                  <div class="card-body bg-light pt-3 pb-0">
+                    {% for referencep in referencesp %}
+                    <div class="row">
+                      <div class="col-2 d-flex align-items-center justify-content-center pb-3">
+                        <div class="icon-box">
+                          <i class="fas fa-handshake"></i>
+                        </div>
+                      </div>
+                      <div class="col-10">
+                        <div class="box-element">
+                          <a class="" href="{{url_for('edit_referencep', referencep_id=referencep.id)}}">
+                            <h4 class="text-uppercase text-dark">{{ referencep.name_rp }}</h4>
+                          </a>
+                          <h3>{{ referencep.profession_rp }}</h3>
+                          {{ referencep.relation_rp }} <br>
+                          {{ referencep.number_rp }} <br>
+                          {{ referencep.mail_rp }} <br>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MODAL REFERENCEP -->
+      <div class="modal fade" id="bd-refp-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelRefp"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>NUEVA REFERENCIA PERSONAL: </b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" class="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                <div class="label-form">
+                  {{ formrefp.name_rp.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefp.name_rp.errors %}
+                  {{ formrefp.name_rp(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefp.name_rp.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefp.name_rp(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefp.profession_rp.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefp.profession_rp.errors %}
+                  {{ formrefp.profession_rp(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefp.profession_rp.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefp.profession_rp(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefp.relation_rp.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefp.relation_rp.errors %}
+                  {{ formrefp.relation_rp(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefp.relation_rp.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefp.relation_rp(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefp.number_rp.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefp.number_rp.errors %}
+                  {{ formrefp.number_rp(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefp.number_rp.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefp.number_rp(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="label-form">
+                  {{ formrefp.mail_rp.label(class="message-text") }}
+                </div>
+                <div class="input-form">
+                  {% if formrefp.mail_rp.errors %}
+                  {{ formrefp.mail_rp(class="message-error") }}
+                  <div class="invalid-feedback">
+                    {% for error in formrefp.mail_rp.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ formrefp.mail_rp(class="input") }}
+                  {% endif %}
+                </div>
+                <div class="submit-form d-flex justify-content-center">
+                  <button type="button" class="btn btn-secondary m-3" data-bs-dismiss="modal">CLOSE</button>
+                  {{ formrefp.submit(class="btn btn-primary m-3 text-uppercase") }}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!------------------->
+      <!------------------------->
+    </div>
+  </div>
+</div>
+<footer class="bg-dark">
+  <div class="container-fluid" style="height: 100px;">
+  </div>
+</footer>
+{% endblock %}
